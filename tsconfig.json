@@ -3,15 +3,31 @@
     "target": "es5",
     "module": "system",
     "moduleResolution": "node",
-    "sourceMap": true,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "removeComments": false,
-    "noImplicitAny": false
+    "noImplicitAny": false,
+    "outDir": "dist/app"
   },
+  "files": [
+    "app/chart_component/chart.component.ts",
+    "app/chart_service/chart.service.ts",
+    "app/colorpicker_component/colorpicker.ts",
+    "app/pipes/property.filter.pipe.ts",
+    "app/study_dialog_component/study.dialog.component.ts",
+    "app/theme_dialog_component/theme.dialog.component.ts",
+    "app/timezone_dialog_component/timezone.dialog.component.ts",
+    "app/ui_component/ui.component.ts",
+    "app/app.component.ts",
+    "app/boot.ts",
+    "node_modules/typescript/lib/lib.es6.d.ts"
+  ],
   "exclude": [
     "node_modules",
     "typings/main",
     "typings/main.d.ts"
+  ],
+  "types": [
+    "core-js"
   ]
 }

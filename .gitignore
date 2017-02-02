@@ -1,1 +1,7 @@
 node_modules/
+chartiq_library/
+typings/
+app/**/*.js
+app/**/*.map
+dist/
+*.log
