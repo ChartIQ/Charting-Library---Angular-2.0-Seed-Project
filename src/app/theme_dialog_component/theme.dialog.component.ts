@@ -1,7 +1,8 @@
 import {Component, NgZone, Output, EventEmitter} from '@angular/core'
 import {Colorpicker} from '../colorpicker_component/colorpicker'
 
-declare var CIQ: any;
+import * as _exports from '../../chartiq_library/js/chartiq';
+var CIQ = _exports.CIQ;
 
 @Component({
   selector: 'theme-dialog',
