@@ -6,6 +6,7 @@ var webpackMerge = require('webpack-merge');
 var webpackConfig = {
   entry: {
     'main': './src/main.browser.ts',
+    'chartiqEntry': './src/chartiq.entry.js',
   },
 
   output: {
@@ -25,7 +26,7 @@ var webpackConfig = {
   ],
 
   module: {
-    loaders: [
+    rules: [
       // .ts files for TypeScript
       {
         test: /\.ts$/,
@@ -49,6 +50,7 @@ var webpackConfig = {
 
 // Our Webpack Defaults
 var defaultConfig = {
+  mode: 'development',
   devtool: 'source-map',
 
   output: {
@@ -59,16 +61,18 @@ var defaultConfig = {
 
   resolve: {
     extensions: [ '.ts', '.js' ],
+    alias: {
+      // chartiq: path.resolve(__dirname, 'chartiq.bundle.js' ),
+      chartiqEntry$: './src/chartiq.entry.js'
+    },
     modules: [
       path.resolve(__dirname, 'node_modules'),
       path.resolve(__dirname, 'src', 'chartiq_library', 'js'),
-      './src/chartiq_library/js/'
+      './src/chartiq_library/js',
       // path.resolve(__dirname, 'src', 'chartiq_library', 'css')
+      path.resolve(__dirname, 'src'),
+      path.resolve(__dirname, 'src','chartiqEntry')
     ],
-    alias: {
-      // chartiq: path.resolve(__dirname, 'chartiq.bundle.js' ),
-      chartiqEntry: './chartiq.entry.js'
-    }
   },
 
   devServer: {

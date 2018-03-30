@@ -1,4 +1,4 @@
-import { CIQ, quotefeedSimulator }from '../../../chartiq.entry'
+import { CIQ, quotefeedSimulator }from '../../chartiq.entry'
 
 export class ChartService{
 

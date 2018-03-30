@@ -1,5 +1,5 @@
-import * as global from './src/chartiq_library/js/chartiq'
-import * as quotefeed from './src/chartiq_library/js/quoteFeedSimulator'
+import * as global from './chartiq_library/js/chartiq'
+import * as quotefeed from './chartiq_library/js/quoteFeedSimulator'
 
 let CIQ = global.CIQ
 let $$ = global.$$

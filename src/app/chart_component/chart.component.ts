@@ -1,9 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {ChartService} from '../chart_service/chart.service';
 
-import * as _exports from '../../chartiq_library/js/chartiq';
-var CIQ = _exports.CIQ;
-var $$$ = _exports.$$$;
+import { CIQ, $$$ } from '../../chartiq.entry'
+
 
 @Component({
   selector: 'chart',
