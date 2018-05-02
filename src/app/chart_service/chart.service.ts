@@ -1,6 +1,7 @@
 import * as _exports from '../../chartiq_library/js/chartiq';
-import '../../chartiq_library/js/quoteFeedSamples'
+import * as qf from '../../chartiq_library/js/quoteFeedSimulator'
 var CIQ = _exports.CIQ;
+var quoteFeedSimulator = qf.quoteFeedSimulator;
 
 export class ChartService{
 
@@ -15,6 +16,6 @@ export class ChartService{
   }
 
   attachQuoteFeed(chart): void {
-    chart.attachQuoteFeed(new CIQ.QuoteFeed.Demo(), { refreshInterval: 1 })
+    chart.attachQuoteFeed(quoteFeedSimulator, { refreshInterval: 1 })
   }
 }
