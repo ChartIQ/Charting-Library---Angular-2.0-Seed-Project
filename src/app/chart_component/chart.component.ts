@@ -2,6 +2,9 @@ import {Component, OnInit} from '@angular/core';
 import {ChartService} from '../chart_service/chart.service';
 
 import * as _exports from '../../chartiq_library/js/chartiq';
+import '../../chartiq_library/js/componentUI'
+import '../../chartiq_library/js/thirdparty/splines'
+import '../../chartiq_library/js/cryptoiq'
 
 let CIQ:any = _exports.CIQ;
 let $$$:any = _exports.$$$;
@@ -14,6 +17,7 @@ let $$$:any = _exports.$$$;
 })
 
 export class ChartComponent implements OnInit {
+  CIQ: any;
   ciq: any;
   sampleData: any[];
   chartSeries:any[];
@@ -23,10 +27,45 @@ export class ChartComponent implements OnInit {
   };
 
   ngOnInit() {
+    this.CIQ = CIQ
     this.ciq = new CIQ.ChartEngine({ container: $$$("#chartContainer")});
     this.ciq.setPeriodicityV2(1, 5);
     this.chartService.attachQuoteFeed(this.ciq);
     this.ciq.newChart("IBM");
+    // this.ciq.setChartType("step_marketdepth");
+    // this.ciq.chart.tension=0.5;
+    // this.ciq.manageTouchAndMouse=false;
+    // this.ciq.newChart("Market Depth", [], null,null,{periodicity:{interval:'tick'}});
+    // // Sample data
+    // var newData={
+    // DT:"2018 - 07 - 30 T04: 00: 00.000 Z",
+    // Last:24.2589,
+    // Bid:100.92,
+    // BidSize:29,
+    // Ask:101.22,
+    // AskSize:226,
+    // BidL2:
+    //   [
+    //   [93.54,5],[93.65,2],[93.95,7],[95.36,2],
+    //   [95.97,9],[96.58,1], [96.68, 8], [96.98, 4],
+    //   [97.08, 5], [97.18, 5], [97.28, 3], [97.38, 5],
+    //   [97.48, 6], [97.69, 26], [98.29, 5], [98.39, 33],
+    //   [98.49, 13], [98.6, 42], [98.8, 13], [98.9, 1]
+    //   ],
+
+    // AskL2:
+    //   [
+    //   [101.22,226],[101.32,31],[101.42,13],[101.53,188],
+    //   [101.63,8],[101.73,5],[101.83,16],[101.93,130],
+    //   [102.03,9],[102.13,122],[102.23,5],[102.33,5],
+    //   [102.43,7],[102.54,9],[102.84,3],[102.94,92],
+    //   [103.04,7],[103.24,4],[103.34,7],[103.44,6]
+    //   ]
+    // }
+
+    // // Call these 2 lines as often as you wish to refresh the data.
+    // this.ciq.updateCurrentMarketData(newData);
+    // this.ciq.draw();
   }
 
   // https://angular.io/docs/ts/latest/api/core/index/OnDestroy-class.html
