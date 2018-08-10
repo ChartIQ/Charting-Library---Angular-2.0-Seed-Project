@@ -3,6 +3,16 @@
 [ ![Codeship Status for ChartIQ/Charting-Library---Angular-Seed-Project](https://app.codeship.com/projects/0b85d6c0-4010-0135-fa79-62e905eb1dfe/status?branch=master)](https://app.codeship.com/projects/229967)
 [![dependencies Status](https://david-dm.org/ChartIQ/Charting-Library---Angular-2.0-Seed-Project/status.svg)](https://david-dm.org/ChartIQ/Charting-Library---Angular-2.0-Seed-Project)
 
+## Working with CryptoIQ Plugin
+
+This branch shows how to load the [CryptoIQ plugin] (https://www.chartiq.com/html5-charting-library/html5-cryptocurrency-charts/) and run create a market depth chart in Angular. The CryptoIQ plugin is designed to work out of the box with W3C web components and will therefore not work correctly if you try to include it in your app. Instead, for market depth charts, include *just* `marketdepth.js`. If you wish to use the orderbook you will need to rework the web component into an Angular component (pull requests welcome).
+
+**THE CRYPTOIQ PLUGIN IS NOT PROVIDED IN THE REPO AND MUST BE SUPPLIED FROM A VALID CHARTIQ LICENSE FILE.** 
+
+When you check out this branch and run `npm start` it *WILL NOT* work until you perform the following:
+ -  copy `./plugins/cryptoiq/marketdepth.js` from the license bundle to `./src/chartiq_library/js`. Otherwise, you will see an error in `chart.component.ts` when compiling, go to that file and move the marketDepth file to where the project expects it to be. Once you've included marketdepth and splines you should be able to see a market depth chart instead of the normal candle chart when you build the project. 
+ - copy  `./plugins/cryptoiq/cryptoiq.css` from the license bundle to `./src/chartiq_library/css`.  Note that the CSS is included in `index.html`.
+ 
 - [Questions and support](#questions-and-support)
 - [Requirements](#requirements)
 - [Getting started](#getting-started)
