@@ -1,8 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ChartService} from '../chart_service/chart.service';
 
-import * as _exports from 'chartiq';
-
+import * as _exports from '../../chartiq_library/js/chartiq';
 
 let CIQ:any = _exports.CIQ;
 let $$$:any = _exports.$$$;
