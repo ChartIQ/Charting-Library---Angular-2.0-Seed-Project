@@ -2,6 +2,7 @@
   "compilerOptions": {
     "allowJs": true,
     "allowUnreachableCode":true,
+    "baseUrl": ".",
     "target": "es5",
     "module": "commonjs",
     "outDir": "dist",
@@ -10,6 +11,11 @@
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "moduleResolution": "node",
+    "paths": {
+      "*": [
+          "src/chartiq_library/js/*",
+        ]
+      },
     "typeRoots": [
       "node_modules/@types"
     ],
