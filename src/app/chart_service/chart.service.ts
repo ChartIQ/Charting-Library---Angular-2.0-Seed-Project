@@ -1,5 +1,5 @@
-import * as _exports from '../../chartiq_library/js/chartiq';
-import * as qf from '../../chartiq_library/js/quoteFeedSimulator'
+import * as _exports from 'chartiq';
+import * as qf from 'quoteFeedSimulator'
 var CIQ = _exports.CIQ;
 var quoteFeedSimulator = qf.quoteFeedSimulator;
 

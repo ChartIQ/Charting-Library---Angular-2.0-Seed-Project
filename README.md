@@ -8,7 +8,7 @@
 - [Getting started](#getting-started)
 - [Contributing to this project](#contributing-to-this-project)
 
-A basic build of the ChartIQ library within the Angular 2.0 framework. This provides an example of how to implement the most common elements in the charting library. This is not a comprehensive example, more like a good starting point for an Angular developer.
+A basic build of the ChartIQ library within the Angular 4.0 framework. This provides an example of how to implement the most common elements in the charting library. This is not a comprehensive example, more like a good starting point for an Angular developer.
 
 ## Questions and support
 
@@ -30,6 +30,9 @@ If you have questions or get stuck using this project or the ChartIQ library, th
 - Open your browser to [`http://localhost:3000`](http://localhost:3000).
   - ***If you have not already replaced `chartiq.js` and `quoteFeedSimulator.js` with your copies from the library zip you will see errors in the console reminding you to do so.***
 - If you want to use another port, open `package.json` file, then change the `server` script from `--port 3000` to the desired port number. A full list of webpack-dev-server command line options can be found [here](https://webpack.js.org/api/cli/#common-options).
+
+## Working with Plugins
+To see an example of how to implement a ChartIQ library plugin check out the [cryptoiq-plugin branch](https://github.com/ChartIQ/Charting-Library---Angular-Seed-Project/tree/cryptoiq-plugin)
 
 ## Contributing to this project
 

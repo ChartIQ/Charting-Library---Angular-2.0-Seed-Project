@@ -61,14 +61,10 @@ var defaultConfig = {
     extensions: [ '.ts', '.js' ],
     modules: [
       path.resolve(__dirname, 'node_modules'),
+      path.resolve(__dirname, 'src', 'chartiq_library'),
       path.resolve(__dirname, 'src', 'chartiq_library', 'js'),
-      './src/chartiq_library/js/'
-      // path.resolve(__dirname, 'src', 'chartiq_library', 'css')
+      path.resolve(__dirname, 'src', 'chartiq_library', 'plugins')
     ],
-    alias: {
-      // chartiq: path.resolve(__dirname, 'chartiq.bundle.js' ),
-      chartiqEntry: './chartiq.entry.js'
-    }
   },
 
   devServer: {
