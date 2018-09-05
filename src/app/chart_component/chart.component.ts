@@ -3,11 +3,10 @@ import {ChartService} from '../chart_service/chart.service';
 
 import * as _exports from '../../chartiq_library/js/chartiq';
 // For market depth charts ONLY load these TWO files
-// Do not try and load cryptoiq.js, it is for webcomponents
 // place the files at the end of these paths to make them work correctly
 // or configure webpack to load them from the plugins folder and make chartiq available to marketdepth as dependency
 import '../../chartiq_library/js/thirdparty/splines'
-import '../../chartiq_library/js/marketdepth'
+import '../../chartiq_library/plugins/cryptoiq/cryptoiq'
 
 let CIQ:any = _exports.CIQ;
 let $$$:any = _exports.$$$;
@@ -40,8 +39,8 @@ export class ChartComponent implements OnInit {
     this.ciq.newChart("Market Depth", [], null,null,{periodicity:{interval:'tick'}});
     // Sample data
     var newData={
-    DT:"2018 - 07 - 30 T04: 00: 00.000 Z",
-    Last:24.2589,
+    DT:new Date("2018-07-30T04:00:00.000Z"),
+    Last:100.2589,
     Bid:100.92,
     BidSize:29,
     Ask:101.22,
