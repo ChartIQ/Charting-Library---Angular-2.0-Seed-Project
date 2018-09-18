@@ -16,7 +16,7 @@ If you have questions or get stuck using this project or the ChartIQ library, th
 
 ## Requirements
 
-- A copy of the ChartIQ Charting Library SDK, version 3.0+ is required. To get your copy, visit https://www.chartiq.com/products/html5-charting-library/ to see a demo and get in touch with us.
+- A copy of the ChartIQ library, version 3.0+ is required. To get your copy, visit https://www.chartiq.com/products/html5-charting-library/ to see a demo and get in touch with us.
 - [node.js](https://nodejs.org/) installed version 5+
 - NPM installed (version 3+) or [Yarn](https://yarnpkg.com/en/)
 
