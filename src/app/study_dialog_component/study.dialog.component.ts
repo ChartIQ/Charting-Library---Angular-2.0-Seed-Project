@@ -1,5 +1,5 @@
 import {Component, NgZone, Output, EventEmitter} from '@angular/core'
-import {FilterByPropertyPipe} from '../pipes/property.filter.pipe'
+import {MapObjectToArrayPipe} from '../pipes/mapObject.pipe'
 
 import * as _exports from '../../chartiq_library/js/chartiq';
 var CIQ = _exports.CIQ;
@@ -8,7 +8,7 @@ var CIQ = _exports.CIQ;
   selector: 'study-dialog',
   styleUrls:['../css/CIQ_Seed.css'],
   templateUrl: './study.dialog.component.html',
-  providers:[FilterByPropertyPipe]
+  providers:[MapObjectToArrayPipe]
 })
 
 export class StudyDialog{

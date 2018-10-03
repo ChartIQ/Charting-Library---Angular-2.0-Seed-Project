@@ -8,7 +8,7 @@ import { ChartComponent } from './chart_component/chart.component';
 import { ChartService } from './chart_service/chart.service';
 import { ChartUI } from './ui_component/ui.component';
 import { Colorpicker } from './colorpicker_component/colorpicker';
-import { FilterByPropertyPipe } from './pipes/property.filter.pipe';
+import { MapObjectToArrayPipe } from './pipes/mapObject.pipe';
 import { StudyDialog } from './study_dialog_component/study.dialog.component';
 import { ThemeDialog } from './theme_dialog_component/theme.dialog.component';
 import { TimezoneDialog } from './timezone_dialog_component/timezone.dialog.component';
@@ -22,7 +22,7 @@ import { TitlecasePipe } from './pipes/title.case.pipe'
     ChartComponent,
     ChartUI,
     Colorpicker,
-    FilterByPropertyPipe,
+    MapObjectToArrayPipe,
     StudyDialog,
     ThemeDialog,
     TimezoneDialog,
