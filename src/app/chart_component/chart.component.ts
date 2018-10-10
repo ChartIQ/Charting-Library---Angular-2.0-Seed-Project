@@ -40,7 +40,7 @@ export class ChartComponent implements OnInit {
     this.ciq.newChart("Market Depth", [], null,null,{periodicity:{interval:'tick'}});
     // Sample data
     var newData={
-    DT:"2018 - 07 - 30 T04: 00: 00.000 Z",
+    DT:new Date("2018-07-30T04:00:00.000Z"),
     Last:24.2589,
     Bid:100.92,
     BidSize:29,
