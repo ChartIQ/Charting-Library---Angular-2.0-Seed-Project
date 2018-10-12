@@ -1,4 +1,4 @@
-<div class="dialog-overlay" id="studyDialog" *ngIf="launchDialog | async">
+<div class="dialog-overlay cq-dialog" id="studyDialog" *ngIf="launchDialog | async">
 	<div class="dialog">
 		<h3>{{studyName}}</h3>
 
@@ -17,7 +17,8 @@
 					<select [(ngModel)]="value">
 						<option *ngFor="let option of input.options | mapObjectToArrayPipe">{{option}}</option>
 					</select>
-				<span>{{input.heading}}</span>
+					<span>{{input.heading}}</span>
+				</div>
 			</div>
 		</div>
 
@@ -30,7 +31,7 @@
 			</div>
 		</div>
 
-			<hr *ngIf="parameters.length">
+		<hr>
 
 		<div id="parameters">
 			<div class="parameter dialog-item" *ngFor="let param of parameters">
@@ -40,9 +41,14 @@
 				<span>{{param.heading}}</span>
 			</div>
 		</div>
-		<button class="pull-right" (click)="updateStudy(inputs, outputs, parameters); closeMe();">Save</button>
+
+	<hr *ngIf="parameters.length">
+	<div>
+		<button class="ciq-dialog-cntrls" (click)="updateStudy(inputs, outputs, parameters); closeMe();"
+		style="margin: 5px 45%;">
+			Save
+		</button>
 	</div>
 
-	<hr>
-
+	</div>
 </div>

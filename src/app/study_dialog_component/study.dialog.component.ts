@@ -103,8 +103,13 @@ export class StudyDialog{
       currentOutputs[outputs[x].name]=outputs[x].color;
     }
     for(var y=0; y<params.length; y++){
-      currentParams[params[y].name+'Value']=params[y].value;
-      currentParams[params[y].name+'Color']=params[y].color;
+      if(params[y].name=="studyOverZones"){
+        currentParams[params[y].name+'Enabled']=params[y].value
+      }
+      else {
+        currentParams[params[y].name+'Value']=params[y].value;
+        currentParams[params[y].name+'Color']=params[y].color;
+      }
     }
 
     this.studyHelper.updateStudy({inputs:currentInputs, outputs:currentOutputs, parameters:currentParams});
