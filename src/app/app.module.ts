@@ -1,6 +1,6 @@
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { AppComponent } from './app.component';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpModule } from '@angular/http';
 
@@ -34,7 +34,6 @@ import { TitlecasePipe } from './pipes/title.case.pipe'
     BrowserModule,
     FormsModule,
     HttpModule,
-    ReactiveFormsModule,
   ],
   providers: [
     ChartService

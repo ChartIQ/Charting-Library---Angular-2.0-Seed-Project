@@ -5,19 +5,22 @@
 		<div id="inputs">
 			<div class="input dialog-item" *ngFor="let input of this.inputs">
 				<div *ngIf="input.type=='number'">
-					{{input.heading}}<input type="number" [(ngModel)]="input.value">
+					{{input.heading}}<input type="number" [(ngModel)]="input.value" name="value">
 				</div>
 				<div *ngIf="input.type=='text'">
-					{{input.heading}}<input type="text" [(ngModel)]="input.value">
+					{{input.heading}}<input type="text" [(ngModel)]="input.value"  name="value">
 				</div>
 				<div *ngIf="input.type=='checkbox'">
-					{{input.heading}}<input type="checkbox" [(ngModel)]="input.value">
+					{{input.heading}}<input type="checkbox" [(ngModel)]="input.value"  name="value">
 				</div>
+
 				<div *ngIf="input.type=='select'">
-					<select [(ngModel)]="value">
+				<form>
+					<select [(ngModel)]="input.value"  name="value">
 						<option *ngFor="let option of input.options | mapObjectToArrayPipe">{{option}}</option>
 					</select>
 					<span>{{input.heading}}</span>
+				</form>
 				</div>
 			</div>
 		</div>
