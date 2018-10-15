@@ -104,7 +104,7 @@ export class StudyDialog{
     }
     for(var y=0; y<params.length; y++){
       if(params[y].name=="studyOverZones"){
-        currentParams[params[y].name+'Enabled']=params[y].value
+        currentParams[params[y].name+'Enabled']=params[y].value;
       }
       else {
         currentParams[params[y].name+'Value']=params[y].value;
