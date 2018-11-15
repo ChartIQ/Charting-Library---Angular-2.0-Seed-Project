@@ -14,6 +14,7 @@ let $$$:any = _exports.$$$;
 })
 
 export class ChartComponent implements OnInit {
+  CIQ: any;
   ciq: any;
   sampleData: any[];
   chartSeries:any[];
@@ -23,6 +24,7 @@ export class ChartComponent implements OnInit {
   };
 
   ngOnInit() {
+    this.CIQ = CIQ;
     this.ciq = new CIQ.ChartEngine({ container: $$$("#chartContainer")});
     this.ciq.setPeriodicityV2(1, 5);
     this.chartService.attachQuoteFeed(this.ciq);
