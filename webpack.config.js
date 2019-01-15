@@ -25,7 +25,7 @@ var webpackConfig = {
   ],
 
   module: {
-    loaders: [
+    rules: [
       // .ts files for TypeScript
       {
         test: /\.ts$/,
@@ -50,7 +50,7 @@ var webpackConfig = {
 // Our Webpack Defaults
 var defaultConfig = {
   devtool: 'source-map',
-
+  mode: 'development',
   output: {
     filename: '[name].bundle.js',
     sourceMapFilename: '[name].map',
