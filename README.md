@@ -16,7 +16,7 @@ If you have questions or get stuck using this project or the ChartIQ library, th
 
 ## Requirements
 
-- A copy of the ChartIQ library, version 5.2+ is required. To get your copy, visit https://www.chartiq.com/products/html5-charting-library/ to see a demo and get in touch with us.
+- A copy of the ChartIQ library, version 6.3+ is required. To get your copy, visit https://www.chartiq.com/products/html5-charting-library/ to see a demo and get in touch with us.
 - [node.js](https://nodejs.org/) installed version 5+
 - NPM installed (version 3+) or [Yarn](https://yarnpkg.com/en/)
 
@@ -24,7 +24,8 @@ If you have questions or get stuck using this project or the ChartIQ library, th
 ## Getting started
 
 - Clone this repository.
-- Extract the contents of your zipped copy of the ChartIQ library into `src/chartiq_library/`. You should now have the folders `src/chartiq_library/css` and `src/chartiq_library/js`. You may be prompted about overwriting the contents of `src/chartiq_librar/js`. These pre-existing files are just stub files and should be overwritten. If you have any questions about where these files should go, follow their expected path backwards from either the `chart.service.ts` or `chart.component.ts`.
+- Extract the contents of your zipped copy of the ChartIQ library on your computer, from this folder move `chartiq.js` and `quoteFeedSimuator.js` into `src/chartiq_library/js`. You may be prompted about overwriting the contents of `src/chartiq_librar/js`. These pre-existing files are just stub files and should be overwritten. If you have any questions about where these files should go, follow their expected path backwards from either the `chart.service.ts` or `chart.component.ts`.
+- Copy the extracted CSS and if you would like sass folders from your ChartIQ library into `src/chartiq_library`.
 - Run `npm install` to install dependencies. It is strongly recommended to not have any of the dependencies installed globally.
 - Run `npm start` to start up the dev server.
 - Open your browser to [`http://localhost:3000`](http://localhost:3000).
@@ -33,6 +34,9 @@ If you have questions or get stuck using this project or the ChartIQ library, th
 
 ## Working with Plugins
 To see an example of how to implement a ChartIQ library plugin check out the [cryptoiq-plugin branch](https://github.com/ChartIQ/Charting-Library---Angular-Seed-Project/tree/cryptoiq-plugin)
+
+## Trouble Shooting
+It is possible to use the project with older libraries, however you may need to make some minor adjustments. Be sure that you have the latest patch release for your library. By default the only files needed from your license are `chartiq.js` and `quoteFeedSimulator.js`, if you are having trouble compiling TypeScript remove all other files.
 
 ## Contributing to this project
 
