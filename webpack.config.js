@@ -63,6 +63,7 @@ var defaultConfig = {
       path.resolve(__dirname, 'node_modules'),
       path.resolve(__dirname, 'src', 'chartiq_library'),
       path.resolve(__dirname, 'src', 'chartiq_library', 'js'),
+      path.resolve(__dirname, 'src', 'chartiq_library', 'example-feeds'),
       path.resolve(__dirname, 'src', 'chartiq_library', 'plugins')
     ],
   },
@@ -72,8 +73,8 @@ var defaultConfig = {
     watchOptions: { aggregateTimeout: 300, poll: 1000 },
     headers: {
       "Access-Control-Allow-Origin": "*",
-      "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, PATCH, OPTIONS",
-      "Access-Control-Allow-Headers": "X-Requested-With, content-type, Authorization"
+      // "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, PATCH, OPTIONS",
+      // "Access-Control-Allow-Headers": "X-Requested-With, content-type, Authorization"
     }
   },
 
