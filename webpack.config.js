@@ -22,6 +22,11 @@ var webpackConfig = {
         // your Angular Async Route paths relative to this root directory
       }
     ),
+
+    new webpack.ProvidePlugin({
+      jQuery: 'jquery',
+      $: 'jquery'
+    })
   ],
 
   module: {
