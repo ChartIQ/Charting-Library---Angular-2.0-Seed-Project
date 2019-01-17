@@ -30,7 +30,7 @@ export class ChartComponent implements OnInit {
   };
 
   ngOnInit() {
-    this.CIQ = CIQ
+    this.CIQ = CIQ;
     this.ciq = new CIQ.ChartEngine({ container: $$$("#chartContainer")});
     // In this example we're creating static market depth chart, no attaching other quoteFeeds or setting a default periodicity
     // to load market depth charts this is all  that needs to be done to load it as the main chart

@@ -1,5 +1,5 @@
 import {Component, NgZone, Output, EventEmitter} from '@angular/core'
-import {FilterByPropertyPipe} from '../pipes/property.filter.pipe'
+import {MapObjectToArrayPipe} from '../pipes/mapObject.pipe'
 
 import * as _exports from '../../chartiq_library/js/chartiq';
 var CIQ = _exports.CIQ;
@@ -8,7 +8,7 @@ var CIQ = _exports.CIQ;
   selector: 'study-dialog',
   styleUrls:['../css/CIQ_Seed.css'],
   templateUrl: './study.dialog.component.html',
-  providers:[FilterByPropertyPipe]
+  providers:[MapObjectToArrayPipe]
 })
 
 export class StudyDialog{
@@ -103,8 +103,13 @@ export class StudyDialog{
       currentOutputs[outputs[x].name]=outputs[x].color;
     }
     for(var y=0; y<params.length; y++){
-      currentParams[params[y].name+'Value']=params[y].value;
-      currentParams[params[y].name+'Color']=params[y].color;
+      if(params[y].name=="studyOverZones"){
+        currentParams[params[y].name+'Enabled']=params[y].value;
+      }
+      else {
+        currentParams[params[y].name+'Value']=params[y].value;
+        currentParams[params[y].name+'Color']=params[y].color;
+      }
     }
 
     this.studyHelper.updateStudy({inputs:currentInputs, outputs:currentOutputs, parameters:currentParams});
