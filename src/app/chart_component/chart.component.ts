@@ -2,6 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {ChartService} from '../chart_service/chart.service';
 
 import * as _exports from '../../chartiq_library/js/chartiq';
+// Uncomment this line to include addOns to your project
+// import 'addOns'
 
 let CIQ:any = _exports.CIQ;
 let $$$:any = _exports.$$$;
@@ -29,6 +31,8 @@ export class ChartComponent implements OnInit {
     this.ciq.setPeriodicityV2(1, 5);
     this.chartService.attachQuoteFeed(this.ciq);
     this.ciq.newChart("IBM");
+    // Comment this line in to add the tooltip when crosshairs are enabled
+    // new CIQ.Tooltip({stx:this.ciq, ohl:true})
   }
 
   // https://angular.io/docs/ts/latest/api/core/index/OnDestroy-class.html

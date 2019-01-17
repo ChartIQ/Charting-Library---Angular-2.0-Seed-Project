@@ -39,6 +39,7 @@
     "angular2-template-loader": "^0.6.2",
     "awesome-typescript-loader": "^5.2.1",
     "css-loader": "^1.0.0",
+    "jquery": "^3.3.1",
     "raw-loader": "^0.5.1",
     "to-string-loader": "^1.1.4",
     "typescript": "^3.1.1",
