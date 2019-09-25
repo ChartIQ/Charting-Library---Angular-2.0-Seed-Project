@@ -68,7 +68,7 @@ var defaultConfig = {
       path.resolve(__dirname, 'node_modules'),
       path.resolve(__dirname, 'src', 'chartiq_library'),
       path.resolve(__dirname, 'src', 'chartiq_library', 'js'),
-      path.resolve(__dirname, 'src', 'chartiq_library', 'example-feeds'),
+      path.resolve(__dirname, 'src', 'chartiq_library', 'examples', 'feeds'),
       path.resolve(__dirname, 'src', 'chartiq_library', 'plugins')
     ],
   },

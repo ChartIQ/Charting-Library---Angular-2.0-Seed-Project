@@ -14,7 +14,7 @@
     "paths": {
       "*": [
       	"src/chartiq_library/js/*",
-      	"src/chartiq_library/example-feeds/*"
+      	"src/chartiq_library/examples/feeds/*"
       ]
     },
     "typeRoots": [
