@@ -88,11 +88,12 @@ export class ChartUI implements AfterViewChecked {
   }
 
   handleThemeSelect(theme){
+    const chart = this.chartComponent.ciq
     if(theme.name=="+ New Theme"){
-      this.themeDialog.showDialog(this.chartComponent.ciq);
+      this.themeDialog.showDialog(chart);
     }
     else{
-      this.themeDialog.updateTheme(theme);
+      this.themeDialog.updateTheme(theme, chart);
     }
   }
 

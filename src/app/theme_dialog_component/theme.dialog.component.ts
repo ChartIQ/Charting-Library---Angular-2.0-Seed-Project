@@ -25,9 +25,9 @@ export class ThemeDialog{
     this.zone = new NgZone({enableLongStackTrace: false});
   }
 
-  updateTheme(theme){
+  updateTheme(theme, chart){
     if(theme.name=="Default"){
-      this.themeHelper=new CIQ.ThemeHelper({'stx':this.ciq});
+      this.themeHelper=new CIQ.ThemeHelper({'stx': chart});
     }
     this.zone.run(()=> {
       this.themeHelper.settings = theme.settings;
