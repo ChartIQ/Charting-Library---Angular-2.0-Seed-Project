@@ -2,8 +2,9 @@
 	<div class="left">
 		<span class="symbol-frame">
 			<input
-				id="symbolInput"
+				class="symbolInput"
 				placeholder="Set Symbol"
+				title="Set Symbol"
 				type="text"
 				(keyup.enter)="changeSymbol()"
 				[(ngModel)]="symbolInput"
@@ -12,8 +13,9 @@
 		</span>
 		<span class="symbol-frame">
 			<input
-				id="symbolCompareInput"
+				class="symbolCompareInput"
 				placeholder="Add Comparison"
+				title="Add Comparison"
 				type="text"
 				(keyup.enter)="addComparison()"
 				[(ngModel)]="symbolComparison"
@@ -22,7 +24,7 @@
 		</span>
 	</div>
 	<div class="right">
-		<menu-select id="periodicitySelect">
+		<menu-select class="theme-select" title="Select periodicity">
 			<span class="title">{{ periodicity }}</span>
 			<menu-select-options class="menu-hover">
 				<menu-option
@@ -33,7 +35,7 @@
 				</menu-option>
 			</menu-select-options>
 		</menu-select>
-		<menu-select id="chartTypeSelect">
+		<menu-select class="chart-type-select top-menu" title="Select chart type">
 			<span class="title">{{ chartType }}</span>
 			<menu-select-options class="menu-hover">
 				<menu-option
@@ -44,10 +46,8 @@
 				</menu-option>
 			</menu-select-options>
 		</menu-select>
-		<menu-select id="studySelect">
-			<span class="title">{{
-				studies.selectedOption || 'Add Study'
-			}}</span>
+		<menu-select class="study-select top-menu" title="Add study">
+			<span class="title">{{ studies.selectedOption || 'Add Study' }}</span>
 			<menu-select-options>
 				<menu-option
 					*ngFor="let study of studies.list"
@@ -57,7 +57,7 @@
 				</menu-option>
 			</menu-select-options>
 		</menu-select>
-		<menu-select id="themeSelect">
+		<menu-select class="theme-select top-menu" title="Select theme">
 			<span class="title">Select Theme</span>
 			<menu-select-options class="menu-hover">
 				<menu-option
@@ -67,13 +67,19 @@
 				>
 			</menu-select-options>
 		</menu-select>
-		<button class="crosshair-btn" (click)="toggleCrosshairs()"></button>
 		<button
+			title="Toggle crosshair"
+			class="crosshair-btn"
+			(click)="toggleCrosshairs()"
+		></button>
+		<button
+			title="Select timezone"
 			class="timezone-btn"
 			(click)="timezoneDialog.launchTimezoneDialog(chartComponent.ciq)"
 			ngClass="{'active':cqNgUi.cqNgChart.ciq.layout.crosshair}"
 		></button>
 		<button
+			title="Drawing tools"
 			class="drawing-toolbar-btn"
 			(click)="drawingToolbar.toggleDrawingToolbar(chartComponent.ciq)"
 		></button>

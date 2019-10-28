@@ -20,6 +20,14 @@ span {
 	box-sizing: border-box;
 }
 
+chart-ui {
+	position: relative;
+	min-width: 518px;
+	width: 100vw;
+	height: 100vh;
+	display: inline-block;
+}
+
 input[type='text'],
 input[type='number'] {
 	border: #ddd solid 1px;
@@ -108,19 +116,19 @@ button:focus {
 	background: #f3f3f3;
 }
 
-#symbolCompareInput,
-#symbolInput {
-	width: 100%;
+.symbolInput[type='text'],
+.symbolCompareInput[type='text'] {
 	border-radius: 1px;
-	display: inline;
+	display: inline-block;
 	border: #333 1px solid;
 	height: 27px;
+	width: 100%;
 }
 
-#symbolInput:hover,
-#symbolCompareInput:hover,
-#symbolInput:focus,
-#symbolCompareInput:focus {
+.symbolInput:hover,
+.symbolCompareInput:hover,
+.symbolInput:focus,
+.symbolCompareInput:focus {
 	transition: background 0.6s 0s;
 	background-color: #233542;
 }
@@ -141,7 +149,8 @@ button:focus {
 
 .symbol-frame {
 	position: relative;
-	width: 130px;
+	max-width: 130px;
+	min-width: 50px;
 }
 
 .symbol-btn,
@@ -236,7 +245,7 @@ button:focus {
 
 menu-select {
 	font-size: 9pt;
-	vertical-align: middle;
+	vertical-align: top;
 	display: inline-block;
 	padding: 5px 5px;
 	font-weight: 300;
@@ -250,10 +259,39 @@ menu-select {
 menu-select span.title {
 	color: #c5c7c9;
 	transition: color 0.2s 0s;
+	width: 27px;
+	height: 27px;
+	padding: 0;
 }
 
 menu-select span.title:hover {
 	color: #ffffff;
+}
+
+menu-select span:after {
+	content: "";
+	display: none;
+	width: 27px;
+	height: 27px;
+	position: static;
+	border-right: none;
+	border-bottom: none;
+	background-image: url(img/stx-sprite-ui.svg);
+	background-position-y: -50px;
+	opacity: .85;
+	transition: opacity .20s 0s;
+}
+
+menu-select.chart-type-select span:after {
+	background-position-x: -350px;
+}
+
+menu-select.study-select span:after {
+	background-position-x: -300px;
+}
+
+menu-select.theme-select span:after {
+	background-position-x: -481px;
 }
 
 menu-select:after {
@@ -296,7 +334,7 @@ menu-select-options {
 	margin: 5px 0px 0px -5px;
 	padding-top: 0px;
 	position: absolute;
-	min-width: 200px;
+	min-width: 164px;
 	max-height: 90%;
 	overflow: auto;
 	background: #fff;
@@ -307,6 +345,11 @@ menu-select-options {
 	-moz-box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
 	box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
 	border-radius: 1px;
+}
+
+menu-select.theme-select menu-select-options {
+	width: 128px;
+	min-width: 128px;
 }
 
 #periodicitySelect menu-select-options {
@@ -804,4 +847,45 @@ div.quick-link:hover {
 .searchFilter input:focus {
 	outline: none;
 	border-bottom-color: #398dff;
+}
+
+
+/* smaller screen adjustments */
+@media only screen and (max-width:700px) {
+	.symbol-frame {
+		width: 96px;
+	}
+
+	.symbol-frame input::placeholder {
+		color: transparent;
+	}
+
+	menu-select.top-menu {
+		padding-top: 0;
+
+	}
+
+	menu-select-options {
+		margin: 0;
+	}
+	
+
+	menu-select.top-menu span.title {
+		font: 0/0 a;
+		overflow: hidden;
+		display: inline-block;
+		margin: 0;
+	}
+
+	menu-select.top-menu:after {
+		display: none;
+	}
+
+	menu-select.top-menu span:after {
+		display: block;
+	}
+
+	.ciq-nav button {
+		vertical-align: top;
+	}
 }
