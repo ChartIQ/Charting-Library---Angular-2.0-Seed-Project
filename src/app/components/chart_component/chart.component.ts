@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation, ViewChild, ElementRef } from '@angular/core';
 
 import { CIQ } from 'chartiq/js/chartiq';
 import { ChartService } from '../../chart_service/chart.service';
@@ -13,14 +13,16 @@ export class ChartComponent implements OnInit {
 	ciq: any;
 	sampleData: any[];
 	chartSeries: any[] = [];
+	showToolbar = false;
+	@ViewChild('chartContainer', { static: true }) domContainer: ElementRef;
 
 	constructor(private chartService: ChartService) {}
 
 	ngOnInit() {
 		this.ciq = new CIQ.ChartEngine({
-			container: document.querySelector('.chartContainer'),
+			container: this.domContainer.nativeElement,
 		});
-		this.ciq.setPeriodicityV2(1, 5);
+		this.ciq.setPeriodicity({ period: 5, interval: 'minute' });
 		this.chartService.attachQuoteFeed(this.ciq);
 		this.ciq.newChart('IBM');
 		// Comment this line in to add the tooltip when crosshairs are enabled
@@ -35,6 +37,14 @@ export class ChartComponent implements OnInit {
 
 	getLayout() {
 		return this.ciq.layout;
+	}
+
+	setToolbar(value: boolean) {
+		this.showToolbar = value;
+	}
+
+	addSeries(series) {
+		this.chartSeries.push(series);
 	}
 
 	removeSeries(series) {

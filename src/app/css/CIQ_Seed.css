@@ -74,13 +74,18 @@ button:focus {
 	cursor: pointer;
 	border: solid 1px transparent;
 	outline: none;
+	margin-right: 4px;
+	height: 30px;
 }
-.ciq-nav button.active,
 .ciq-nav button:hover {
 	border-radius: 1px;
 	border: solid 1px #273949;
 	outline: none;
 	opacity: 1;
+}
+
+.ciq-nav button.active {
+	border-bottom: solid 3px #398dff;
 }
 
 .ciq-nav input {
@@ -259,9 +264,8 @@ menu-select {
 menu-select span.title {
 	color: #c5c7c9;
 	transition: color 0.2s 0s;
-	width: 27px;
-	height: 27px;
 	padding: 0;
+	text-transform: capitalize;
 }
 
 menu-select span.title:hover {
@@ -322,6 +326,7 @@ menu-select-options menu-option {
 	line-height: 27px;
 	height: 27px;
 	color: #666;
+	text-transform: capitalize;
 }
 menu-select-options menu-option span {
 	font-weight: 300;

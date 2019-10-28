@@ -1,4 +1,7 @@
-<div class="chartContainer">
+<div 
+	class="chartContainer" 
+	[class.toolbarOn]="showToolbar"
+	#chartContainer>
 	<div class="comparisons">
 		<div class="comparisonWrapper" *ngFor="let comparison of chartSeries">
 			<div

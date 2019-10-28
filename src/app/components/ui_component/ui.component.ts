@@ -5,118 +5,128 @@ import {
 	ChangeDetectionStrategy,
 	NgZone,
 } from '@angular/core';
-import { ChartComponent } from '../chart_component/chart.component';
-import { StudyDialog } from '../study_dialog_component/study.dialog.component';
-import { ThemeDialog } from '../theme_dialog_component/theme.dialog.component';
-import { TimezoneDialog } from '../timezone_dialog_component/timezone.dialog.component';
-import { Colorpicker } from '../colorpicker_component/colorpicker';
-import { OverlayMenu } from '../overlay_menu_component/overlay.menu';
+
+import {
+	ChartComponent,
+	ThemeDialog,
+	DrawingToolbar,
+	StudyDialog,
+	TimezoneDialog,
+	Colorpicker,
+	OverlayMenu,
+} from '../';
 
 import { CIQ } from 'chartiq';
+import { interval } from 'rxjs';
 
 @Component({
 	selector: 'chart-ui',
 	templateUrl: './ui.component.html',
-	providers: [
-		ChartComponent,
-		StudyDialog,
-		ThemeDialog,
-		TimezoneDialog,
-		Colorpicker,
-		OverlayMenu,
-	],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ChartUI implements AfterViewChecked {
-	@ViewChild(ChartComponent, { static: true })
-	chartComponent: ChartComponent;
+	@ViewChild(ChartComponent, { static: true }) chartComponent: ChartComponent;
 	@ViewChild(ThemeDialog, { static: true }) themeDialog: ThemeDialog;
+	@ViewChild(DrawingToolbar, { static: true }) drawingToolbar: DrawingToolbar;
 	symbolInput: string;
 	public chartLayout: any;
 	periodicity: string;
 	chartType: string;
 	symbolComparison: string;
+	showCrosshair = false;
+	showDrawing = false;
 
 	constructor(private zone: NgZone) {
 		this.periodicity = '5 min';
 		this.chartType = 'candle';
 	}
+
 	ngAfterViewChecked() {
 		this.chartLayout = this.getChartLayout();
 	}
+
 	changeSymbol() {
 		this.chartComponent.ciq.newChart(
 			this.symbolInput,
-			this.chartComponent.sampleData
 		);
 		this.symbolInput = '';
 	}
-	changePeriodicity(period, interval) {
-		this.chartComponent.ciq.setPeriodicityV2(period, interval);
-		for (let i in this.periodicityOptions) {
-			if (
-				this.periodicityOptions[i].interval ==
-					this.chartLayout.interval &&
-				this.periodicityOptions[i].period ==
-					this.chartLayout.periodicity
-			) {
-				this.zone.run(() => {
-					this.periodicity = this.periodicityOptions[i].label;
-				});
-			}
+
+	changePeriodicity(period: number, unit: string | number) {
+		const timeUnit = typeof unit === 'number' ? 'minute' : unit;
+		const interval = typeof unit === 'number' ? unit : 1;
+		this.chartComponent.ciq.setPeriodicity({ period, timeUnit, interval });
+
+		const selection = Object.values(this.periodicityOptions).find(({ period: p, interval: i}) => {
+			return period === p && unit === i;
+		});
+		if (selection) {
+			this.periodicity = selection.label;
 		}
 	}
+
 	changeChartType(type) {
+		const ciq = this.getChart();
 		if (
 			(type.aggregationEdit &&
-				this.chartComponent.ciq.layout.aggregationType != type.type) ||
+				ciq.layout.aggregationType != type.type) ||
 			type.type == 'heikinashi'
 		) {
-			this.chartComponent.ciq.setChartType('candle');
-			this.chartComponent.ciq.setAggregationType(type.type);
+			ciq.setChartType('candle');
+			ciq.setAggregationType(type.type);
 		} else {
-			this.chartComponent.ciq.setChartType(type.type);
+			ciq.setChartType(type.type);
 		}
 		//update the ui
 		this.chartType = type.label;
 	}
+
 	toggleCrosshairs() {
-		let state = this.chartComponent.ciq.layout.crosshair;
-		this.chartComponent.ciq.layout.crosshair = !state;
+		const layout = this.getChartLayout();
+		layout.crosshair = !layout.crosshair;
+		this.showCrosshair = layout.crosshair;
 	}
+
+	toggleDrawingToolbar() {
+		console.log(this.drawingToolbar)
+		this.showDrawing = this.drawingToolbar.toggleDrawingToolbar(this.getChart());
+	}
+
 	addComparison() {
 		if (this.symbolComparison) {
-			// Note that this color generator has a bias toward darker colors. Just needed a quick solution here.
-			var getRandomColor = function() {
-				let letters = '0123456789ABCDEF';
-				let color = '#';
-				for (var i = 0; i < 6; i++) {
-					color += letters[Math.floor(Math.random() * 16)];
-				}
-				return color;
-			};
-			let newSeries = this.chartComponent.ciq.addSeries(
-				this.symbolComparison,
-				{
-					isComparison: true,
-					color: getRandomColor(),
-					data: { useDefaultQuoteFeed: true },
-				}
-			);
-			//update the comparison legend
-			this.chartComponent.chartSeries.push(newSeries);
+			const newSeries = this.chartComponent.ciq.addSeries(this.symbolComparison, {
+				isComparison: true,
+				color: getRandomColor(),
+				data: { useDefaultQuoteFeed: true },
+			});
+			// update the comparison legend
+			this.chartComponent.addSeries(newSeries);
 			this.symbolComparison = null;
 		} else {
 			console.log('Error: no symbol for comparison entered');
 		}
+
+		function getRandomColor() {
+			// Note that this color generator has a bias toward darker colors. 
+			const letters = '0123456789ABCDEF';
+			let color = '#';
+			for (var i = 0; i < 6; i++) {
+				color += letters[Math.floor(Math.random() * 16)];
+			}
+			return color;
+		};
+	}
+
+	getChart() {
+		return this.chartComponent.ciq;
 	}
 	getChartLayout() {
 		return this.chartComponent.getLayout();
 	}
 
 	handleThemeSelect(theme) {
-		const chart = this.chartComponent.ciq;
-		if (theme.name == '+ New Theme') {
+		const chart = this.getChart();
+		if (theme.name === '+ New Theme') {
 			this.themeDialog.showDialog(chart);
 		} else {
 			this.themeDialog.updateTheme(theme, chart);
@@ -125,33 +135,23 @@ export class ChartUI implements AfterViewChecked {
 
 	updateThemeList(params) {
 		if (params.name) {
-			// we aren't going to allow unnamed themes to be created
-			var duplicate = false;
-			for (var i = 0; i < this.themes.length; i++) {
-				if (this.themes[i].name == params.name) {
-					this.themes[i].settings = params.settings;
+			// do not allow unnamed themes to be created
+			let duplicate = false;
+			// update existing name theme
+			for (let theme of this.themes) {
+				if (theme.name === params.name) {
+					theme.settings = params.settings;
 					duplicate = true;
 				}
 			}
-			if (!duplicate)
-				// if it's duplicate we are going to update that existing theme
+			if (!duplicate) {
+				// if it's not duplicate insert the theme before the last item - "New Theme"
 				this.themes.splice(this.themes.length - 1, 0, params);
+			}
 		} else console.error('Please name your custom theme.');
 	}
 
-	orderedStudies: any = Object.keys(CIQ.Studies.studyLibrary).sort(function(
-		a,
-		b
-	) {
-		if (a < b) {
-			return -1;
-		}
-		if (a > b) {
-			return 1;
-		}
-		// must be equal
-		return 0;
-	});
+	orderedStudies: any = Object.keys(CIQ.Studies.studyLibrary).sort();
 
 	studies: any = {
 		list: Object.keys(CIQ.Studies.studyLibrary).sort(),
@@ -160,8 +160,8 @@ export class ChartUI implements AfterViewChecked {
 
 	themes: any = [
 		{
-			name: 'Default',
 			// the default theme settings
+			name: 'Default',
 			settings: {
 				chart: {
 					'Axis Text': { color: 'rgba(197,199,201,1)' },
@@ -190,7 +190,7 @@ export class ChartUI implements AfterViewChecked {
 		{ name: '+ New Theme' },
 	];
 
-	periodicityOptions: Array<any> = [
+	periodicityOptions: Array<{ period: number, interval: number | string, label: string }> = [
 		{
 			period: 1,
 			interval: 1,

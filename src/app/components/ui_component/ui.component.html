@@ -69,8 +69,15 @@
 		</menu-select>
 		<button
 			title="Toggle crosshair"
-			class="crosshair-btn"
+			class="crosshair-btn toggle-button"
+			[class.active]="showCrosshair"
 			(click)="toggleCrosshairs()"
+		></button>
+		<button
+			title="Drawing tools"
+			class="drawing-toolbar-btn toggle-button"
+			[class.active]="showDrawing"
+			(click)="toggleDrawingToolbar()"
 		></button>
 		<button
 			title="Select timezone"
@@ -78,17 +85,13 @@
 			(click)="timezoneDialog.launchTimezoneDialog(chartComponent.ciq)"
 			ngClass="{'active':cqNgUi.cqNgChart.ciq.layout.crosshair}"
 		></button>
-		<button
-			title="Drawing tools"
-			class="drawing-toolbar-btn"
-			(click)="drawingToolbar.toggleDrawingToolbar(chartComponent.ciq)"
-		></button>
 	</div>
 </nav>
 <!-- The components -->
 <div class="ciq-chart-area">
 	<drawing-toolbar
 		#drawingToolbar
+		[chartContainer]="chartComponent"
 		(launchColorpickerEvent)="colorpicker.launchColorpicker($event)"
 	></drawing-toolbar>
 	<chart #chartComponent></chart>

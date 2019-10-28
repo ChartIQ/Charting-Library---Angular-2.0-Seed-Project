@@ -1,7 +1,8 @@
-import { Component, Output, EventEmitter } from '@angular/core';
+import { Component, Output, EventEmitter, Input } from '@angular/core';
 
 import { CIQ } from 'chartiq';
 import { TitlecasePipe } from '../../pipes/title.case.pipe';
+import { ChartComponent } from '../chart_component/chart.component';
 
 @Component({
 	selector: 'drawing-toolbar',
@@ -34,6 +35,7 @@ export class DrawingToolbar {
 	bold: boolean = false;
 	italic: boolean = false;
 	showFontOptions: boolean = false;
+	@Input() chartContainer: ChartComponent;
 	@Output() launchToolbar = new EventEmitter<any>();
 	@Output() launchColorpickerEvent = new EventEmitter<any>();
 
@@ -68,10 +70,9 @@ export class DrawingToolbar {
 			this.pattern = false;
 			this.ciq.changeVectorType('');
 		}
-		var elem = document.querySelector('.chartContainer');
-		if (this.open) elem.className += ' toolbarOn';
-		else elem.classList.remove('toolbarOn');
+		this.chartContainer.setToolbar(this.open);
 		this.ciq.draw();
+		return this.open;
 	}
 
 	setTool(tool) {
@@ -82,9 +83,9 @@ export class DrawingToolbar {
 		if (tool == 'callout' || tool == 'annotation') {
 			// no need to do this every time
 			// Sync the defaults for font tool
-			var style = this.ciq.canvasStyle('stx_annotation');
+			const style = this.ciq.canvasStyle('stx_annotation');
 
-			var size = style.fontSize;
+			const size = style.fontSize;
 			this.ciq.currentVectorParameters.annotation.font.size = size;
 			this.fontSize = size;
 			this.ciq.currentVectorParameters.annotation.font.family =

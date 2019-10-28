@@ -21,8 +21,7 @@ export class OverlayMenu {
 
 	launchMe = function({ sd, ciq: stx, ciq: { cx, cy } }) {
 		this.launchMenu = true;
-		this.top = cy + 'px';
-		this.left = cx + 'px';
+		this.style = { top: cy + 'px', left: cx + 'px'}
 		this.stx = stx;
 		this.sd = sd;
 	};
