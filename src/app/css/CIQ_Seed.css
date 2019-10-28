@@ -22,7 +22,7 @@ span {
 
 chart-ui {
 	position: relative;
-	min-width: 518px;
+	min-width: 524px;
 	width: 100vw;
 	height: 100vh;
 	display: inline-block;
@@ -156,6 +156,8 @@ button:focus {
 	position: relative;
 	max-width: 130px;
 	min-width: 50px;
+	width: 130px;
+	transition: all 350ms;
 }
 
 .symbol-btn,
