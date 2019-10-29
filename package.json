@@ -1,64 +1,64 @@
 {
-  "name": "chartiq-angular",
-  "version": "2.0.0",
-  "description": "A simple starter for ChartIQ in Angular",
-  "scripts": {
-    "build": "webpack --progress",
-    "server": "webpack-dev-server --inline --progress --port 3000 --content-base src",
-    "start": "npm run server",
-    "test": "npm run build"
-  },
-  "engineStrict": true,
-  "engines": {
-    "node": ">=5.0.0",
-    "npm": ">=3.0.0"
-  },
-  "license": "ISC",
-  "dependencies": {
-    "@angular/animations": "^6.1.9",
-    "@angular/common": "^6.1.9",
-    "@angular/compiler": "^6.1.9",
-    "@angular/compiler-cli": "^6.1.9",
-    "@angular/core": "^6.1.9",
-    "@angular/forms": "^6.1.9",
-    "@angular/http": "^6.1.9",
-    "@angular/platform-browser": "^6.1.9",
-    "@angular/platform-browser-dynamic": "^6.1.9",
-    "@angular/platform-server": "^6.1.9",
-    "@angular/router": "^6.1.9",
-    "@angular/upgrade": "^6.1.9",
-    "core-js": "^2.5.7",
-    "ie-shim": "^0.1.0",
-    "reflect-metadata": "^0.1.3",
-    "rxjs": "^6.3.3",
-    "zone.js": "^0.8.26"
-  },
-  "devDependencies": {
-    "@types/node": "^10.11.4",
-    "angular2-router-loader": "^0.3.5",
-    "angular2-template-loader": "^0.6.2",
-    "awesome-typescript-loader": "^5.2.1",
-    "css-loader": "^1.0.0",
-    "jquery": "^3.3.1",
-    "raw-loader": "^0.5.1",
-    "to-string-loader": "^1.1.4",
-    "typescript": "^3.1.1",
-    "url-loader": "^1.1.1",
-    "webpack": "^4.20.2",
-    "webpack-cli": "^3.1.2",
-    "webpack-dev-server": "^3.1.9",
-    "webpack-merge": "^4.1.4"
-  },
-  "keywords": [
-    "Angular",
-    "ChartIQ"
-  ],
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/ChartIQ/Charting-Library---Angular-2.0-Seed-Project.git"
-  },
-  "bugs": {
-    "url": "https://github.com/ChartIQ/Charting-Library---Angular-2.0-Seed-Project/issues"
-  },
-  "homepage": "https://github.com/ChartIQ/Charting-Library---Angular-2.0-Seed-Project/blob/master/README.md"
+	"name": "chartiq-angular",
+	"version": "0.0.0",
+	"scripts": {
+		"ng": "ng",
+		"start": "ng serve",
+		"build": "ng build",
+		"build:prod": "ng build --prod --extract-css --resources-output-path resources ",
+		"test": "ng test",
+		"lint": "ng lint",
+		"e2e": "ng e2e"
+	},
+	"engineStrict": true,
+	"engines": {
+		"node": ">=10.9.0"
+	},
+	"license": "ISC",
+	"dependencies": {
+		"@angular/animations": "~8.2.8",
+		"@angular/common": "~8.2.8",
+		"@angular/compiler": "~8.2.8",
+		"@angular/core": "~8.2.8",
+		"@angular/forms": "~8.2.8",
+		"@angular/platform-browser": "~8.2.8",
+		"@angular/platform-browser-dynamic": "~8.2.8",
+		"@angular/router": "~8.2.8",
+		"rxjs": "~6.4.0",
+		"tslib": "^1.10.0",
+		"zone.js": "~0.9.1"
+	},
+	"devDependencies": {
+		"@angular-devkit/build-angular": "~0.803.6",
+		"@angular/cli": "~8.3.6",
+		"@angular/compiler-cli": "~8.2.8",
+		"@angular/language-service": "~8.2.8",
+		"@types/node": "~8.9.4",
+		"@types/jasmine": "~3.3.8",
+		"@types/jasminewd2": "~2.0.3",
+		"codelyzer": "^5.0.0",
+		"jasmine-core": "~3.4.0",
+		"jasmine-spec-reporter": "~4.2.1",
+		"karma": "~4.1.0",
+		"karma-chrome-launcher": "~2.2.0",
+		"karma-coverage-istanbul-reporter": "~2.0.1",
+		"karma-jasmine": "~2.0.1",
+		"karma-jasmine-html-reporter": "^1.4.0",
+		"protractor": "~5.4.0",
+		"ts-node": "~7.0.0",
+		"tslint": "~5.15.0",
+		"typescript": "~3.5.3"
+	},
+	"keywords": [
+		"Angular",
+		"ChartIQ"
+	],
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/ChartIQ/Charting-Library---Angular-2.0-Seed-Project.git"
+	},
+	"bugs": {
+		"url": "https://github.com/ChartIQ/Charting-Library---Angular-2.0-Seed-Project/issues"
+	},
+	"homepage": "https://github.com/ChartIQ/Charting-Library---Angular-2.0-Seed-Project/blob/master/README.md"
 }
