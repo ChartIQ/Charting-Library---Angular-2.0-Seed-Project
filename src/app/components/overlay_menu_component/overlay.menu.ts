@@ -5,8 +5,7 @@ import { Component, ElementRef, EventEmitter, Output } from '@angular/core';
 	templateUrl: './overlay.menu.html',
 })
 export class OverlayMenu {
-	left: number = 0;
-	top: number = 0;
+	style: any;
 	stx: any;
 	sd: any;
 	launchMenu: any = false;
@@ -21,7 +20,7 @@ export class OverlayMenu {
 
 	launchMe = function({ sd, ciq: stx, ciq: { cx, cy } }) {
 		this.launchMenu = true;
-		this.style = { top: cy + 'px', left: cx + 'px'}
+		this.style = { top: cy + 'px', left: cx + 'px' };
 		this.stx = stx;
 		this.sd = sd;
 	};
