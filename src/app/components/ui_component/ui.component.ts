@@ -46,9 +46,7 @@ export class ChartUI implements AfterViewChecked {
 	}
 
 	changeSymbol() {
-		this.chartComponent.ciq.newChart(
-			this.symbolInput,
-		);
+		this.chartComponent.ciq.newChart(this.symbolInput);
 		this.symbolInput = '';
 	}
 
@@ -57,9 +55,11 @@ export class ChartUI implements AfterViewChecked {
 		const interval = typeof unit === 'number' ? unit : 1;
 		this.chartComponent.ciq.setPeriodicity({ period, timeUnit, interval });
 
-		const selection = Object.values(this.periodicityOptions).find(({ period: p, interval: i}) => {
-			return period === p && unit === i;
-		});
+		const selection = Object.values(this.periodicityOptions).find(
+			({ period: p, interval: i }) => {
+				return period === p && unit === i;
+			}
+		);
 		if (selection) {
 			this.periodicity = selection.label;
 		}
@@ -67,11 +67,7 @@ export class ChartUI implements AfterViewChecked {
 
 	changeChartType(type) {
 		const ciq = this.getChart();
-		if (
-			(type.aggregationEdit &&
-				ciq.layout.aggregationType != type.type) ||
-			type.type == 'heikinashi'
-		) {
+		if (type.aggregationEdit || type.type == 'heikinashi') {
 			ciq.setChartType('candle');
 			ciq.setAggregationType(type.type);
 		} else {
@@ -88,17 +84,22 @@ export class ChartUI implements AfterViewChecked {
 	}
 
 	toggleDrawingToolbar() {
-		console.log(this.drawingToolbar)
-		this.showDrawing = this.drawingToolbar.toggleDrawingToolbar(this.getChart());
+		console.log(this.drawingToolbar);
+		this.showDrawing = this.drawingToolbar.toggleDrawingToolbar(
+			this.getChart()
+		);
 	}
 
 	addComparison() {
 		if (this.symbolComparison) {
-			const newSeries = this.chartComponent.ciq.addSeries(this.symbolComparison, {
-				isComparison: true,
-				color: getRandomColor(),
-				data: { useDefaultQuoteFeed: true },
-			});
+			const newSeries = this.chartComponent.ciq.addSeries(
+				this.symbolComparison,
+				{
+					isComparison: true,
+					color: getRandomColor(),
+					data: { useDefaultQuoteFeed: true },
+				}
+			);
 			// update the comparison legend
 			this.chartComponent.addSeries(newSeries);
 			this.symbolComparison = null;
@@ -107,14 +108,14 @@ export class ChartUI implements AfterViewChecked {
 		}
 
 		function getRandomColor() {
-			// Note that this color generator has a bias toward darker colors. 
+			// Note that this color generator has a bias toward darker colors.
 			const letters = '0123456789ABCDEF';
 			let color = '#';
 			for (var i = 0; i < 6; i++) {
 				color += letters[Math.floor(Math.random() * 16)];
 			}
 			return color;
-		};
+		}
 	}
 
 	getChart() {
@@ -190,7 +191,11 @@ export class ChartUI implements AfterViewChecked {
 		{ name: '+ New Theme' },
 	];
 
-	periodicityOptions: Array<{ period: number, interval: number | string, label: string }> = [
+	periodicityOptions: Array<{
+		period: number;
+		interval: number | string;
+		label: string;
+	}> = [
 		{
 			period: 1,
 			interval: 1,
