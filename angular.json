@@ -23,11 +23,12 @@
 						"polyfills": "src/polyfills.ts",
 						"tsConfig": "tsconfig.app.json",
 						"aot": false,
-						"assets": [
-							"src/favicon.ico", 
-							"src/assets"
-						],
+						"assets": ["src/favicon.ico", "src/assets"],
 						"styles": [
+							"node_modules/chartiq/css/normalize.css",
+							"node_modules/chartiq/css/stx-chart.css",
+							"node_modules/chartiq/css/chartiq.css",
+							"node_modules/chartiq/css/perfect-scrollbar.css",
 							"src/styles.scss"
 						],
 						"scripts": []

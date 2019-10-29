@@ -6,18 +6,11 @@ import {
 	NgZone,
 } from '@angular/core';
 
-import {
-	ChartComponent,
-	ThemeDialog,
-	DrawingToolbar,
-	StudyDialog,
-	TimezoneDialog,
-	Colorpicker,
-	OverlayMenu,
-} from '../';
+import { ChartComponent } from '../chart_component/chart.component';
+import { ThemeDialog } from '../theme_dialog_component/theme.dialog.component';
+import { DrawingToolbar } from '../drawing_toolbar_component/drawing.toolbar.component';
 
 import { CIQ } from 'chartiq';
-import { interval } from 'rxjs';
 
 @Component({
 	selector: 'chart-ui',
