@@ -275,7 +275,7 @@ menu-select span.title:hover {
 }
 
 menu-select span:after {
-	content: "";
+	content: '';
 	display: none;
 	width: 27px;
 	height: 27px;
@@ -284,8 +284,8 @@ menu-select span:after {
 	border-bottom: none;
 	background-image: url(img/stx-sprite-ui.svg);
 	background-position-y: -50px;
-	opacity: .85;
-	transition: opacity .20s 0s;
+	opacity: 0.85;
+	transition: opacity 0.2s 0s;
 }
 
 menu-select.chart-type-select span:after {
@@ -856,9 +856,8 @@ div.quick-link:hover {
 	border-bottom-color: #398dff;
 }
 
-
 /* smaller screen adjustments */
-@media only screen and (max-width:700px) {
+@media only screen and (max-width: 760px) {
 	.symbol-frame {
 		width: 96px;
 	}
@@ -869,13 +868,11 @@ div.quick-link:hover {
 
 	menu-select.top-menu {
 		padding-top: 0;
-
 	}
 
 	menu-select-options {
 		margin: 0;
 	}
-	
 
 	menu-select.top-menu span.title {
 		font: 0/0 a;
