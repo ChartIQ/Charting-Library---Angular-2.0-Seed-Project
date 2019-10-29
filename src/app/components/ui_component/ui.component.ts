@@ -77,7 +77,6 @@ export class ChartUI implements AfterViewChecked {
 	}
 
 	toggleDrawingToolbar() {
-		console.log(this.drawingToolbar);
 		this.showDrawing = this.drawingToolbar.toggleDrawingToolbar(
 			this.getChart()
 		);
