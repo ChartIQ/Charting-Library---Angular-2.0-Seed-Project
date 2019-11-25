@@ -10,7 +10,9 @@
 		"module": "esnext",
 		"moduleResolution": "node",
 		"paths": {
-			// "jquery": ["node_modules/chartiq/js"]
+			// following mapping is used only if chartiq is not npm installed and placed in source
+			// "chartiq/*": ["src/chartiq_library/*"],
+			// "chartiq": ["src/chartiq_library/js/chartiq.js"]
 		},
 		"importHelpers": true,
 		"target": "es5",
