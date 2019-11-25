@@ -1,11 +1,21 @@
-import { Component, Output, EventEmitter } from '@angular/core';
-import { CIQ } from 'chartiq';
+import {
+	Component,
+	Output,
+	EventEmitter,
+	OnInit,
+	ChangeDetectionStrategy,
+} from '@angular/core';
+import { Observable } from 'rxjs';
+import { filter, tap } from 'rxjs/operators';
+
+import { ChartService } from 'src/app/services';
 
 @Component({
 	selector: 'study-dialog',
 	templateUrl: './study.dialog.component.html',
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class StudyDialog {
+export class StudyDialog implements OnInit {
 	studyHelper: any = {};
 	inputs: any = [];
 	outputs: any;
@@ -13,37 +23,34 @@ export class StudyDialog {
 	studyId: any;
 	studyName: any;
 	activeOutput: any = {};
-	@Output() launchDialog = new EventEmitter<any>();
-	@Output() launchColorpickerEvent = new EventEmitter<any>();
-	@Output() launchOverlayMenu = new EventEmitter<any>();
 
-	addStudy(study, ciq) {
-		var self = this;
-		var closure = function(fc) {
-			return function() {
-				fc.apply(self, arguments);
-			};
-		};
-		ciq.callbacks.studyOverlayEdit = closure(this.showMenu);
-		ciq.callbacks.studyPanelEdit = closure(this.showDialog);
-		CIQ.Studies.addStudy(ciq, study);
+	$showDialog: Observable<any>;
+	@Output() launchColorpickerEvent = new EventEmitter<any>();
+
+	constructor(private chartService: ChartService) {}
+
+	ngOnInit() {
+		const thisDialogOnly = params => !params || params.dialog === 'study';
+
+		this.$showDialog = this.chartService.$dialog.pipe(
+			filter(thisDialogOnly),
+			tap(params => params && this.showDialog(params))
+		);
 	}
-	showMenu = function() {
-		this.launchOverlayMenu.emit({
-			sd: arguments[0].sd,
-			ciq: arguments[0].stx,
-		});
-	};
-	showDialog = function({ sd, stx }) {
-		this.studyHelper = new CIQ.Studies.DialogHelper({ sd, stx });
+
+	addStudy(study) {
+		this.chartService.addStudy(study);
+	}
+
+	showDialog({ sd }) {
+		this.studyHelper = this.chartService.getStudyDialogHelper(sd);
 
 		this.inputs = this.studyHelper.inputs;
 		this.outputs = this.studyHelper.outputs;
 		this.parameters = this.studyHelper.parameters;
 		this.studyId = this.studyHelper.name;
 		this.studyName = this.studyHelper.title;
-		this.launchDialog.emit(true);
-	};
+	}
 
 	updateStudyHelperColors(color, { name }) {
 		const matchName = el => el.name === name;
@@ -51,37 +58,35 @@ export class StudyDialog {
 		const parameter = this.studyHelper.parameters.find(matchName);
 
 		if (output) {
-			output.color = '#' + color;
+			output.color = color;
 		}
 		if (parameter) {
-			parameter.color = '#' + color;
+			parameter.color = color;
 		}
 	}
 
 	launchColorpicker(setting, { target: swatch }) {
-		this.launchColorpickerEvent.emit({
-			swatch,
-			setting,
+		const self = this;
+
+		this.chartService.showColorPicker(swatch, color => {
+			self.updateStudyHelperColors(color, setting);
+			swatch.style.backgroundColor = color;
 		});
 	}
 
 	setColorFromPicker({ color, source, params }) {
 		this.updateStudyHelperColors(color, params);
-		source.style.backgroundColor = CIQ.hexToRgba('#' + color);
+		source.style.backgroundColor = this.chartService.hexToRgba(color);
 	}
 
-	removeStudy = function(args) {
-		CIQ.Studies.removeStudy(args.stx, args.sd);
-	};
-
 	closeMe = function() {
-		this.launchDialog.emit(false);
+		this.chartService.hideDialog();
 	};
 
 	updateStudy = function(inputs, outputs, params) {
-		var currentInputs = {};
-		var currentOutputs = {};
-		var currentParams = {};
+		const currentInputs = {};
+		const currentOutputs = {};
+		const currentParams = {};
 		for (var i = 0; i < inputs.length; i++) {
 			currentInputs[inputs[i].name] = inputs[i].value;
 		}

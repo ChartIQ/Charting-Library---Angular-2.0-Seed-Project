@@ -1,35 +1,39 @@
-<div class="dialog-overlay" id="timezoneDialog" *ngIf="launchDialog | async">
+<div class="dialog-overlay" id="timezoneDialog" *ngIf="$showDialog | async">
 	<div class="dialog timezone">
-		<div class="cq-close" (click)="closeMe()"></div>
-		<h3 class="center">Select Timezone</h3>
-		<div *ngIf="myZone" class="current-location-message">
-			Your timezone is your current location
-		</div>
-		<button
-			*ngIf="!myZone"
-			class="current-location-btn"
-			(click)="setMyTimezone()"
-		>
-			Use my current location
-		</button>
-
-		<div class="searchFilter">
-			<input
-				placeholder="Search"
-				type="search"
-				[(ngModel)]="filter"
-				(ngModelChange)="onFilter($event)"
-			/>
-		</div>
-		<ul class="timezoneList">
-			<li
-				class="dialog-item"
-				*ngFor="let zone of timezonesFiltered"
-				(click)="setTimezone(zone)"
+		<button class="cq-close" (click)="closeMe()"></button>
+		<div class="dialog-content">
+			<h3 class="center">Select Timezone</h3>
+			<div class="current-location-message">
+				Your timezone is
+				{{ selectedZone ? selectedZone : 'your current location' }}
+			</div>
+	
+			<button
+				*ngIf="selectedZone"
+				class="current-location-btn"
+				(click)="setMyTimezone()"
 			>
-				{{ zone }}
-			</li>
-		</ul>
-		<div class="instruct">(Scroll for more options)</div>
+				Use my current location
+			</button>
+	
+			<div class="searchFilter">
+				<input
+					placeholder="Search"
+					type="search"
+					[(ngModel)]="filter"
+					(ngModelChange)="onFilter($event)"
+				/>
+			</div>
+			<ul class="timezoneList">
+				<li
+					class="dialog-item"
+					*ngFor="let zone of timezonesFiltered"
+					(click)="setTimezone(zone)"
+				>
+					{{ zone }}
+				</li>
+			</ul>
+			<div class="instruct">(Scroll for more options)</div>
+		</div>
 	</div>
 </div>

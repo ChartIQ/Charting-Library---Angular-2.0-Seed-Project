@@ -1,7 +1,7 @@
 <span
 	class="overlayMenu"
-	*ngIf="launchMenu"
-	[ngStyle]="style"
+	*ngIf="$showMenu | async as position"
+	[ngStyle]="position"
 >
 	<div class="edit" (click)="clickHandler('edit')">Edit settings...</div>
 	<div class="delete" (click)="clickHandler('delete')">Delete study</div>

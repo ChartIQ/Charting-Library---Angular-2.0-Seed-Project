@@ -1,5 +1,8 @@
-@import '../node_modules/chartiq/css/normalize.css';
-@import '../node_modules/chartiq/css/stx-chart.css';
-@import '../node_modules/chartiq/css/chartiq.css';
-@import '../node_modules/chartiq/css/perfect-scrollbar.css';
+@import '~chartiq/css/normalize.css';
+@import '~chartiq/css/stx-chart.css';
+@import '~chartiq/css/chartiq.css';
+@import '~chartiq/css/perfect-scrollbar.css';
 @import './app/css/CIQ_Seed.css';
+
+// to enable tfc plugin uncomment next line
+// @import '~chartiq/plugins/tfc/tfc.css';

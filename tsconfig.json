@@ -1,29 +1,24 @@
 {
-  "compileOnSave": false,
-  "compilerOptions": {
-    "baseUrl": "./",
-    "outDir": "./dist/out-tsc",
-    "sourceMap": true,
-    "declaration": false,
-    "downlevelIteration": true,
-    "experimentalDecorators": true,
-    "module": "esnext",
-    "moduleResolution": "node",
-    "paths": {
-      // following mapping is required if not chartiq is not npm installed and placed in source
-      // "*": [
-      //   "src/chartiq_library/js/*",
-      //   "src/chartiq_library/examples/feeds/*",
-      //   "src/chartiq_library/example-feeds/*"
-      // ]
-    },
-    "importHelpers": true,
-    "target": "es5",
-    "typeRoots": ["node_modules/@types"],
-    "lib": ["es2018", "dom"]
-  },
-  "angularCompilerOptions": {
-    "fullTemplateTypeCheck": true,
-    "strictInjectionParameters": true
-  }
+	"compileOnSave": false,
+	"compilerOptions": {
+		"baseUrl": "./",
+		"outDir": "./dist/out-tsc",
+		"sourceMap": true,
+		"declaration": false,
+		"downlevelIteration": true,
+		"experimentalDecorators": true,
+		"module": "esnext",
+		"moduleResolution": "node",
+		"paths": {
+			// "jquery": ["node_modules/chartiq/js"]
+		},
+		"importHelpers": true,
+		"target": "es5",
+		"typeRoots": ["node_modules/@types"],
+		"lib": ["es2018", "dom"]
+	},
+	"angularCompilerOptions": {
+		"fullTemplateTypeCheck": true,
+		"strictInjectionParameters": true
+	}
 }
