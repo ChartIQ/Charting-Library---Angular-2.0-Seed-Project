@@ -885,7 +885,8 @@ ciq-colorpicker {
 }
 
 /* tfc panels have been configured using box-sizing: content-box */
-.chartContainer .create-order {
+.chartContainer div,
+.chartContainer span {
 	box-sizing: content-box;
 }
 /* #endregion */
