@@ -40,7 +40,8 @@ export class TimezoneDialog implements OnInit {
 	}
 
 	closeMe() {
-		setTimeout(() => this.chartService.hideDialog(), 800);
+		const timeToObserveChange = 800; // arbitrary set time to observe change made in dialog before closing
+		setTimeout(() => this.chartService.hideDialog(), timeToObserveChange);
 	}
 
 	onFilter(value) {

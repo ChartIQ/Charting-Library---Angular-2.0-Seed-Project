@@ -19,13 +19,11 @@ export class TfcService extends ITfc {
 				{
 					CIQ: { TFC, Account },
 				},
-			]) => {
-				new TFC({
+			]) => new TFC({
 					stx,
 					context,
 					account: Account.Demo,
-				});
-			}
+				})
 		);
 	}
 

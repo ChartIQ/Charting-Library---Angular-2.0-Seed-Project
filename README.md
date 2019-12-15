@@ -6,7 +6,7 @@
 - [Enabling TFC plugin](#enable-tfc-plugin)
 - [Legacy IE11 support](#enable-ie11)
 - [Contributing to this project](#contributing-to-this-project)
-- [Using with library versions prior to 7.2](#using-with-library-versions-prior-to-7.2)
+
 
 A basic build of the ChartIQ library using the Angular 8.0 framework with [Angular CLI](https://cli.angular.io) support.
 This provides an example of how to implement the most common elements in the charting library.

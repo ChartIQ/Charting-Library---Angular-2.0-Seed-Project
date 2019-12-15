@@ -351,10 +351,7 @@ export function loadConfig(http: HttpClient, config: ConfigService) {
 						resolve(true);
 					}),
 					catchError((res: { status: number }) => {
-						if (res.status !== 404) {
-							resolve(false);
-						}
-						resolve(true);
+						resolve(res.status !== 404);
 						return of({});
 					})
 				)

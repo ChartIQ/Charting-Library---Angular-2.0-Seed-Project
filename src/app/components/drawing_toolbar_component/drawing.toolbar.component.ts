@@ -85,7 +85,7 @@ export class DrawingToolbar {
 			lineWidth,
 			pattern,
 			toolParams: true,
-			lineColor: color === 'auto' ? 'white' : 'color',
+			lineColor: color === 'auto' ? 'white' : color,
 			selectedLineClass:
 				lineWidth && pattern ? `ciq-${pattern}-${lineWidth}` : '',
 		});
