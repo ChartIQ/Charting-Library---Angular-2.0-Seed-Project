@@ -889,4 +889,9 @@ ciq-colorpicker {
 .chartContainer span {
 	box-sizing: content-box;
 }
+
+.chartContainer select {
+	box-sizing: border-box;
+}
+
 /* #endregion */
