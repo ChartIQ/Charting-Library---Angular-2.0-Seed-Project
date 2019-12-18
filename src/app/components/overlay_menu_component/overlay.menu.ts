@@ -1,36 +1,49 @@
-import { Component, ElementRef, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+
+import { ChartService } from 'src/app/services';
 
 @Component({
 	selector: 'overlay-menu',
 	templateUrl: './overlay.menu.html',
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class OverlayMenu {
-	style: any;
-	stx: any;
+export class OverlayMenu implements OnInit {
 	sd: any;
-	launchMenu: any = false;
-	@Output() launchStudyDialog: EventEmitter<any> = new EventEmitter();
-	@Output() removeStudy: EventEmitter<any> = new EventEmitter();
+	$showMenu: Observable<any>;
 
-	constructor(public element: ElementRef) {}
+	constructor(private chartSevice: ChartService) {}
 
-	closeMe() {
-		this.launchMenu = null;
+	ngOnInit() {
+		this.$showMenu = this.chartSevice.$contexMenu.pipe(
+			map(params => this.positionToStyle(params))
+		);
 	}
 
-	launchMe = function({ sd, ciq: stx, ciq: { cx, cy } }) {
-		this.launchMenu = true;
-		this.style = { top: cy + 'px', left: cx + 'px' };
-		this.stx = stx;
-		this.sd = sd;
-	};
+	positionToStyle(params) {
+		if (!params) {
+			return null;
+		}
+
+		this.sd = params.sd;
+
+		return {
+			left: params.stx.cx + 'px',
+			top: params.stx.cy + 'px',
+		};
+	}
+
+	closeMe() {
+		this.chartSevice.closeContext();
+	}
 
 	clickHandler(event) {
-		const { stx, sd } = this;
+		const { sd } = this;
 		if (event == 'edit') {
-			this.launchStudyDialog.emit({ sd, stx });
+			this.chartSevice.showDialog('study', { sd });
 		} else {
-			this.removeStudy.emit({ sd, stx });
+			this.chartSevice.removeStudy(sd);
 		}
 		this.closeMe();
 	}

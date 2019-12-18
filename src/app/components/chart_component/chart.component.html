@@ -1,14 +1,12 @@
-<div 
-	class="chartContainer" 
-	[class.toolbarOn]="showToolbar"
-	#chartContainer>
+<div class="chartContainer" #chartContainer xyz="test">
 	<div class="comparisons">
-		<div class="comparisonWrapper" *ngFor="let comparison of chartSeries">
+		<div
+			class="comparisonWrapper"
+			*ngFor="let comparison of $chartSeries | async"
+		>
 			<div
 				class="chartSeriesColor"
-				[ngStyle]="{
-					'background-color': comparison.parameters.color
-				}"
+				[ngStyle]="{ backgroundColor: comparison.parameters.color }"
 			></div>
 			<div class="chartSeries">{{ comparison.display }}</div>
 			<div class="deleteSeries" (click)="removeSeries(comparison)"></div>

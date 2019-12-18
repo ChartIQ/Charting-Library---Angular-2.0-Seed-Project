@@ -1,59 +1,51 @@
-import { Component, Output, EventEmitter } from '@angular/core';
+import { Component, ChangeDetectionStrategy, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
+import { filter, tap } from 'rxjs/operators';
 
-import { CIQ } from 'chartiq';
+import { ChartService } from 'src/app/services';
 
 @Component({
 	selector: 'timezone-dialog',
 	templateUrl: './timezone.dialog.component.html',
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class TimezoneDialog {
+export class TimezoneDialog implements OnInit {
 	ciq: any;
 	timezones: any[] = [];
 	timezonesFiltered: any[] = [];
 	filter = '';
-	myZone: any;
-	@Output() launchDialog = new EventEmitter<any>();
+	selectedZone = '';
+	$showDialog: Observable<any>;
 
-	constructor() {
-		this.timezones = Object.values(CIQ.timeZoneMap).sort();
+	constructor(private chartService: ChartService) {
+		this.timezones = this.chartService.getTimezones();
 		this.timezonesFiltered = this.timezones;
-		this.myZone = true; //default behavior
 	}
 
-	launchTimezoneDialog(chart) {
-		this.ciq = chart;
-		this.launchDialog.emit(true);
+	ngOnInit() {
+		const thisDialogOnly = params => !params || params.dialog === 'timezone';
+
+		this.$showDialog = this.chartService.$dialog.pipe(filter(thisDialogOnly));
 	}
 
-	setTimezone(zone) {
-		this.ciq.setTimeZone(this.ciq.dataZone, zone);
-		this.myZone = false;
-		if (this.ciq.chart.symbol) this.ciq.draw();
-		this.launchDialog.emit(false);
-	}
-
-	setMyTimezone() {
-		this.ciq.defaultDisplayTimeZone = null;
-		for (var i = 0; i < CIQ.ChartEngine.registeredContainers.length; i++) {
-			var stx = CIQ.ChartEngine.registeredContainers[i].stx;
-			stx.displayZone = null;
-			this.myZone = true;
-			stx.setTimeZone();
-
-			if (stx.displayInitialized) stx.draw();
-		}
-		if (this.ciq.chart.symbol) this.ciq.draw();
+	setTimezone(zone = null) {
+		this.selectedZone = zone;
+		this.chartService.setTimezone(zone);
 		this.closeMe();
 	}
 
-	closeMe = function() {
-		this.launchDialog.emit(false);
-	};
+	setMyTimezone() {
+		this.setTimezone();
+		this.selectedZone = '';
+	}
+
+	closeMe() {
+		const timeToObserveChange = 800; // arbitrary set time to observe change made in dialog before closing
+		setTimeout(() => this.chartService.hideDialog(), timeToObserveChange);
+	}
 
 	onFilter(value) {
 		const re = RegExp(value, 'i');
-		this.timezonesFiltered = this.timezones.filter(
-			el => !value || re.test(el)
-		);
+		this.timezonesFiltered = this.timezones.filter(el => !value || re.test(el));
 	}
 }

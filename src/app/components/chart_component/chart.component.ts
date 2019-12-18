@@ -1,65 +1,59 @@
-import { Component, OnInit, ViewEncapsulation, ViewChild, ElementRef } from '@angular/core';
+import {
+	Component,
+	OnInit,
+	ViewEncapsulation,
+	ViewChild,
+	ElementRef,
+	ChangeDetectionStrategy,
+} from '@angular/core';
 
-import { CIQ } from 'chartiq/js/chartiq';
-import { ChartService } from '../../chart_service/chart.service';
+import { Observable } from 'rxjs';
+
+import { ChartService, ConfigService } from '../../services';
 
 @Component({
 	selector: 'chart',
 	templateUrl: './chart.component.html',
 	encapsulation: ViewEncapsulation.None,
-	providers: [ChartService],
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ChartComponent implements OnInit {
-	ciq: any;
-	sampleData: any[];
-	chartSeries: any[] = [];
-	showToolbar = false;
+	$chartSeries: Observable<Array<any>>;
+	height = 300;
+	toolbarVisible = false;
+
 	@ViewChild('chartContainer', { static: true }) domContainer: ElementRef;
 
-	constructor(private chartService: ChartService) {}
+	constructor(
+		private chartService: ChartService,
+		private config: ConfigService
+	) {}
 
 	ngOnInit() {
-		this.ciq = new CIQ.ChartEngine({
-			container: this.domContainer.nativeElement,
+		const { symbol, layout, refreshInterval } = this.config;
+
+		this.$chartSeries = this.chartService.$chartSeries;
+		const container = this.domContainer.nativeElement;
+		this.chartService.$toolbarActive.subscribe(isOn => {
+			this.height = isOn ? 300 : 250;
 		});
-		this.ciq.setPeriodicity({ period: 5, interval: 'minute' });
-		this.chartService.attachQuoteFeed(this.ciq);
-		this.ciq.newChart('IBM');
-		// Comment this line in to add the tooltip when crosshairs are enabled
-		// new CIQ.Tooltip({ stx: this.ciq, ohl: true });
+
+		this.chartService.createChart(container, {
+			symbol,
+			...layout,
+			refreshInterval,
+		});
 	}
 
-	ngOnDestroy() {
-		// This will remove the quoteDriver, styles and
-		// eventListeners for this ChartEngine instance.
-		this.ciq.destroy();
-	}
-
-	getLayout() {
-		return this.ciq.layout;
-	}
-
-	setToolbar(value: boolean) {
-		this.showToolbar = value;
-	}
-
-	addSeries(series) {
-		this.chartSeries.push(series);
+	showToolbar(value: boolean) {
+		this.toolbarVisible = value;
 	}
 
 	removeSeries(series) {
-		var index = this.chartSeries.indexOf(series, 0);
-		if (index > -1) {
-			this.chartSeries.splice(index, 1);
-		}
-		this.ciq.removeSeries(series.display, this.ciq.ciq);
+		this.chartService.removeSeries(series);
 	}
 
-	set(multiplier, span) {
-		var params = {
-			multiplier: multiplier,
-			span: span,
-		};
-		this.ciq.setSpan(params, function() {});
+	ngOnDestroy() {
+		this.chartService.destroyChart();
 	}
 }

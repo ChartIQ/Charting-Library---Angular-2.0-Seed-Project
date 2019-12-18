@@ -26,20 +26,26 @@
 	<div class="right">
 		<menu-select class="theme-select" title="Select periodicity">
 			<span class="title">{{ periodicity }}</span>
+			<span class="icon"></span>
 			<menu-select-options class="menu-hover">
 				<menu-option
-					*ngFor="let period of periodicityOptions"
-					(click)="changePeriodicity(period.period, period.interval)"
+					*ngFor="let period of config.periodicityOptions"
+					class="radio-menu"
+					[class.active]="period.label == periodicity"
+					(click)="changePeriodicity(period)"
 				>
 					{{ period.label }}
 				</menu-option>
 			</menu-select-options>
 		</menu-select>
 		<menu-select class="chart-type-select top-menu" title="Select chart type">
-			<span class="title">{{ chartType }}</span>
+			<span class="title">Display</span>
+			<span class="icon"></span>
 			<menu-select-options class="menu-hover">
 				<menu-option
-					*ngFor="let type of chartTypes"
+					*ngFor="let type of config.chartTypes"
+					class="radio-menu"
+					[class.active]="chartType == type.label"
 					(click)="changeChartType(type)"
 				>
 					{{ type.label }}
@@ -47,30 +53,36 @@
 			</menu-select-options>
 		</menu-select>
 		<menu-select class="study-select top-menu" title="Add study">
-			<span class="title">{{ studies.selectedOption || 'Add Study' }}</span>
+			<span class="title">Studies</span>
+			<span class="icon"></span>
 			<menu-select-options>
 				<menu-option
-					*ngFor="let study of studies.list"
-					(click)="studyDialog.addStudy(study, chartComponent.ciq)"
+					*ngFor="let study of studiesList"
+					(click)="addStudy(study)"
 				>
 					{{ study }}
 				</menu-option>
 			</menu-select-options>
 		</menu-select>
 		<menu-select class="theme-select top-menu" title="Select theme">
-			<span class="title">Select Theme</span>
-			<menu-select-options class="menu-hover">
-				<menu-option
-					*ngFor="let theme of themes"
-					(click)="handleThemeSelect(theme)"
-					><span>{{ theme.name }}</span></menu-option
-				>
-			</menu-select-options>
+			<span class="title">Themes</span>
+			<span class="icon"></span>
+			<ng-container *ngIf="$themes | async as themes">
+				<menu-select-options class="menu-hover">
+					<menu-option
+						*ngFor="let theme of themes.list"
+						[class.radio-menu]="theme.name != '+ New Theme'"
+						[class.active]="theme.name === themes.selected"
+						(click)="handleThemeSelect(theme)"
+						><span>{{ theme.name }}</span>
+					</menu-option>
+				</menu-select-options>
+			</ng-container>
 		</menu-select>
 		<button
 			title="Toggle crosshair"
 			class="crosshair-btn toggle-button"
-			[class.active]="showCrosshair"
+			[class.active]="$crosshair | async"
 			(click)="toggleCrosshairs()"
 		></button>
 		<button
@@ -82,49 +94,44 @@
 		<button
 			title="Select timezone"
 			class="timezone-btn"
-			(click)="timezoneDialog.launchTimezoneDialog(chartComponent.ciq)"
-			ngClass="{'active':cqNgUi.cqNgChart.ciq.layout.crosshair}"
+			(click)="showTimezoneDialog()"
+		></button>
+		<button
+			[style.display]="($tfc | async) ? 'inline-block' : 'none'"
+			title="TFC"
+			class="tfc-btn"
+			(click)="toggleTFC()"
 		></button>
 	</div>
 </nav>
 <!-- The components -->
-<div class="ciq-chart-area">
-	<drawing-toolbar
-		#drawingToolbar
-		[chartContainer]="chartComponent"
-		(launchColorpickerEvent)="colorpicker.launchColorpicker($event)"
-	></drawing-toolbar>
-	<chart #chartComponent></chart>
+<div class="ciq-chart-area" [class.toolbar-on]="$toolbarActive | async">
+	<div class="chart-content">
+		<drawing-toolbar
+			#drawingToolbar
+			[chartContainer]="chartComponent"
+		></drawing-toolbar>
+		<chart #chartComponent></chart>
+	</div>
+	<cq-side-panel>
+		<div class="tfc-load-info">
+			Loading TFC ...
+		</div>
+	</cq-side-panel>
 </div>
 <div class="ciq-footer">
-	<div class="quick-link" (click)="chartComponent.set(1, 'all')">All</div>
-	<div class="quick-link" (click)="chartComponent.set(5, 'year')">5y</div>
-	<div class="quick-link" (click)="chartComponent.set(1, 'year')">1y</div>
-	<div class="quick-link" (click)="chartComponent.set(1, 'YTD')">YTD</div>
-	<div class="quick-link" (click)="chartComponent.set(3, 'month')">3m</div>
-	<div class="quick-link" (click)="chartComponent.set(1, 'month')">1m</div>
-	<div class="quick-link" (click)="chartComponent.set(5, 'day')">5d</div>
-	<div class="quick-link" (click)="chartComponent.set(1, 'today')">1d</div>
+	<div class="ciq-span-links">
+		<div
+			*ngFor="let footerLink of config.footerSpanSizes"
+			(click)="setSpan(footerLink.span, footerLink.unit)"
+			class="ciq-footer-link"
+		>
+			{{ footerLink.label }}
+		</div>
+	</div>
 </div>
-<study-dialog
-	#studyDialog
-	(launchColorpickerEvent)="colorpicker.launchColorpicker($event)"
-	(launchOverlayMenu)="overlayMenu.launchMe($event)"
-></study-dialog>
-<theme-dialog
-	#themeDialog
-	(themeToPush)="updateThemeList($event)"
-	(launchColorpickerEvent)="colorpicker.launchColorpicker($event)"
-></theme-dialog>
+<study-dialog #studyDialog></study-dialog>
+<theme-dialog #themeDialog></theme-dialog>
 <timezone-dialog #timezoneDialog></timezone-dialog>
-<colorpicker
-	#colorpicker
-	(setDrawingSwatchColor)="drawingToolbar.setColorFromPicker($event)"
-	(setThemeSwatchColor)="themeDialog.setColorFromPicker($event)"
-	(setStudySwatchColor)="studyDialog.setColorFromPicker($event)"
-></colorpicker>
-<overlay-menu
-	#overlayMenu
-	(launchStudyDialog)="studyDialog.showDialog($event)"
-	(removeStudy)="studyDialog.removeStudy($event)"
-></overlay-menu>
+<ciq-colorpicker #colorpicker></ciq-colorpicker>
+<overlay-menu></overlay-menu>

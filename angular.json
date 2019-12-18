@@ -15,22 +15,26 @@
 			"prefix": "app",
 			"architect": {
 				"build": {
-					"builder": "@angular-devkit/build-angular:browser",
+					"builder": "@angular-builders/custom-webpack:browser",
 					"options": {
+						"customWebpackConfig": {
+							"path": "./custom-webpack.config.js"
+						},
 						"outputPath": "dist/chartiq-angular",
 						"index": "src/index.html",
 						"main": "src/main.ts",
 						"polyfills": "src/polyfills.ts",
 						"tsConfig": "tsconfig.app.json",
 						"aot": false,
-						"assets": ["src/favicon.ico", "src/assets"],
-						"styles": [
-							"node_modules/chartiq/css/normalize.css",
-							"node_modules/chartiq/css/stx-chart.css",
-							"node_modules/chartiq/css/chartiq.css",
-							"node_modules/chartiq/css/perfect-scrollbar.css",
-							"src/styles.scss"
+						"assets": [
+							"src/favicon.ico",
+							{
+								"glob": "**/*",
+								"input": "src/assets",
+								"output": "/resources/"
+							}
 						],
+						"styles": ["src/styles.scss"],
 						"scripts": []
 					},
 					"configurations": {
@@ -66,8 +70,11 @@
 					}
 				},
 				"serve": {
-					"builder": "@angular-devkit/build-angular:dev-server",
+					"builder": "@angular-builders/custom-webpack:dev-server",
 					"options": {
+						"customWebpackConfig": {
+							"path": "./custom-webpack.config.js"
+						},
 						"browserTarget": "chartiq-angular:build"
 					},
 					"configurations": {

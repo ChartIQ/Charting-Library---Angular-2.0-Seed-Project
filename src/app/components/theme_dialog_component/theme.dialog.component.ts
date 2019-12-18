@@ -1,12 +1,22 @@
-import { Component, Output, EventEmitter } from '@angular/core';
+import {
+	Component,
+	Output,
+	EventEmitter,
+	ChangeDetectionStrategy,
+	OnInit,
+} from '@angular/core';
 
-import { CIQ } from 'chartiq';
+import { Observable } from 'rxjs';
+import { filter, tap } from 'rxjs/operators';
+
+import { ChartService } from '../../services';
 
 @Component({
 	selector: 'theme-dialog',
 	templateUrl: './theme.dialog.component.html',
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ThemeDialog {
+export class ThemeDialog implements OnInit {
 	themeHelper: any = {};
 	themeName: string;
 	candleUp: any;
@@ -17,20 +27,54 @@ export class ThemeDialog {
 	background: any;
 	gridDividers: any;
 	gridLines: any;
+	$showDialog: Observable<any>;
 	@Output() themeToPush = new EventEmitter<any>();
-	@Output() launchDialog = new EventEmitter<any>();
-	@Output() launchColorpickerEvent = new EventEmitter<any>();
 
-	updateTheme(theme, chart) {
-		if (theme.name == 'Default') {
-			this.themeHelper = new CIQ.ThemeHelper({ stx: chart });
-		}
-		this.themeHelper.settings = theme.settings;
-		this.themeHelper.update();
+	constructor(private chartService: ChartService) {}
+
+	ngOnInit() {
+		const thisDialogOnly = params => !params || params.dialog === 'theme';
+
+		this.$showDialog = this.chartService.$dialog.pipe(
+			filter(thisDialogOnly),
+			tap(params => params && this.showDialog())
+		);
+	}
+
+	// updateTheme(theme) {
+	// 	// if (theme.name == 'Default') {
+	// 	// 	this.themeHelper = this.chartService.getThemeHelper();
+	// 	// }
+	// 	// this.themeHelper.settings = theme.settings;
+	// 	// this.themeHelper.update();
+	// }
+
+	showDialog = function() {
+		this.themeHelper = this.chartService.getThemeHelper();
+		this.initSettings = this.chartService.getThemeSettings();
+
+		const { chartTypes, chart } = this.themeHelper.settings;
+		const { up, down } = chartTypes['Candle/Bar'];
+
+		this.candleUp = up;
+		this.candleDown = down;
+		this.lineBarChart = chartTypes['Line'];
+		this.mountainChart = chartTypes['Mountain'];
+		this.axis = chart['Axis Text'];
+		this.background = chart['Background'];
+		this.gridDividers = chart['Grid Dividers'];
+		this.gridLines = chart['Grid Lines'];
+	};
+
+	launchColorpicker(setting, { target: swatch }) {
+		this.chartService.showColorPicker(swatch, color => {
+			swatch.style.backgroundColor = color;
+			this.updateThemeHelper(color, setting);
+		});
 	}
 
 	updateThemeHelper = function(color, themeDetail) {
-		const colorStr = CIQ.hexToRgba('#' + color);
+		const colorStr = color;
 		const { chartTypes, chart } = this.themeHelper.settings;
 		switch (themeDetail) {
 			case 'candleUp':
@@ -70,43 +114,22 @@ export class ThemeDialog {
 				chart['Axis Text'].color = colorStr;
 				break;
 		}
+
+		this.themeHelper.update();
 	};
-
-	showDialog = function(stx) {
-		this.themeHelper = new CIQ.ThemeHelper({ stx });
-		const { chartTypes, chart } = this.themeHelper.settings;
-		const { up, down } = chartTypes['Candle/Bar'];
-
-		this.candleUp = up;
-		this.candleDown = down;
-		this.lineBarChart = chartTypes['Line'];
-		this.mountainChart = chartTypes['Mountain'];
-		this.axis = chart['Axis Text'];
-		this.background = chart['Background'];
-		this.gridDividers = chart['Grid Dividers'];
-		this.gridLines = chart['Grid Lines'];
-		this.launchDialog.emit(true);
-	};
-
-	launchColorpicker(setting, { target: swatch }) {
-		this.launchColorpickerEvent.emit({
-			swatch,
-			setting,
-		});
-	}
-
-	setColorFromPicker({ color, source, params }) {
-		this.updateThemeHelper(color, params);
-		source.style.backgroundColor = CIQ.hexToRgba('#' + color);
-	}
 
 	closeMe = function(saveTheme = false) {
 		if (saveTheme) {
-			var clone = CIQ.clone(this.themeHelper.settings);
-			var newTheme = { name: this.themeName, settings: clone };
-			this.themeToPush.emit(newTheme);
-			this.updateTheme(newTheme);
+			const saved = this.chartService.saveTheme(
+				this.themeName,
+				this.themeHelper
+			);
+			if (!saved) {
+				return;
+			}
+		} else {
+			this.chartService.applyThemeSettings(this.initSettings);
 		}
-		this.launchDialog.emit(false);
+		this.chartService.hideDialog();
 	};
 }

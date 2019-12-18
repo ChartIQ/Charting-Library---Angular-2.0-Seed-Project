@@ -1,4 +1,4 @@
-<div class="toolbar" *ngIf="launchToolbar | async">
+<div class="toolbar" *ngIf="open">
 	<menu-select id="toolSelect">
 		<span class="title">{{ selectedTool || 'Select Tool' }}</span>
 		<menu-select-options class="menu-hover">
@@ -13,18 +13,20 @@
 	<div class="drawingParameters" *ngIf="toolParams">
 		<div
 			*ngIf="fillColor"
+			title="Fill color"
 			[ngStyle]="{ 'background-color': fillColor }"
 			class="color-picker-swatch fill"
-			(click)="launchColorpicker('drawingFill', $event)"
+			(click)="launchColorpicker('Fill', $event)"
 		></div>
 		<div
 			*ngIf="lineColor"
+			title="Line color"
 			[ngStyle]="{ 'background-color': lineColor }"
 			class="color-picker-swatch line"
-			(click)="launchColorpicker('drawingLine', $event)"
+			(click)="launchColorpicker('Line', $event)"
 		></div>
-		<div *ngIf="lineWidth && pattern">
-			<menu-select id="lineSelect">
+		<div *ngIf="lineWidth && pattern" title="Line width and pattern">
+			<menu-select class="lineSelect">
 				<span class="title" [ngClass]="selectedLineClass"></span>
 				<menu-select-options class="menu-hover">
 					<menu-option
@@ -75,9 +77,21 @@
 				</menu-select-options>
 			</menu-select>
 		</div>
-		<div *ngIf="selectedTool == 'Callout' || selectedTool == 'Annotation'">
-			<div class="italicBtn" (click)="toggleStyle('italic')">I</div>
-			<div class="boldBtn" (click)="toggleStyle('bold')">B</div>
+		<div *ngIf="showFontOptions" class="font-style">
+			<button
+				class="italicBtn toggle-button"
+				(click)="toggleStyle('italic')"
+				[class.active]="italic"
+			>
+				I
+			</button>
+			<button
+				class="boldBtn toggle-button"
+				(click)="toggleStyle('bold')"
+				[class.active]="bold"
+			>
+				B
+			</button>
 			<menu-select id="fontSizeSelect">
 				<span class="title">{{ fontSize }}</span>
 				<menu-select-options class="menu-hover">

@@ -3,10 +3,12 @@
 - [Questions and support](#questions-and-support)
 - [Requirements](#requirements)
 - [Getting started](#getting-started)
+- [Enabling TFC plugin](#enable-tfc-plugin)
+- [Legacy IE11 support](#enable-ie11)
 - [Contributing to this project](#contributing-to-this-project)
-- [Using with library versions prior to 7.2](#using-with-library-versions-prior-to-7.2)
 
-A basic build of the ChartIQ library using the Angular 8.0 framework and [Angular CLI](https://cli.angular.io) support.
+
+A basic build of the ChartIQ library using the Angular 8.0 framework with [Angular CLI](https://cli.angular.io) support.
 This provides an example of how to implement the most common elements in the charting library.
 This is not a comprehensive example, more like a good starting point for an Angular developer.
 [Here is a live demo of the Angular Seed Project.](https://demo.chartiq.com/angular-seed/)
@@ -30,29 +32,16 @@ These are the basic instructions to get this project running with no extra featu
 - Run `npm start` to start up the dev server.
 - Open your browser to [`http://localhost:4200`](http://localhost:4200).
 
-## Using with library versions prior to 7.2
+## Enbalig TFC plugin
 
-- Copy unzipped library source directory to ./src folder with the name chartiq_library
-- Update angular.json styles section to reference styles in src directory
+- Uncomment 3 lines following the `"// to enable tfc plugin uncomment next line"`
+  in the **_src/styles.scss_** and **_src/app.module.ts_** files.
 
-```
-  "styles": [
-    "src/chartiq_library/css/normalize.css",
-    "src/chartiq_library/css/stx-chart.css",
-    "src/chartiq_library/css/chartiq.css",
-    "src/chartiq_library/css/perfect-scrollbar.css",
-    "src/styles.scss"
-  ]
-```
+## Enabling IE11
 
-- uncomment path section in tsconfig.json
+- run `npm install core-js`
 
-```
-  "paths": {
-    "chartiq/*": ["src/chartiq_library/*"],
-    "chartiq": ["src/chartiq_library/js/chartiq.js"]
-  },
-```
+- uncomment IE11 related imports in polyfills.js file
 
 ## Contributing to this project
 
