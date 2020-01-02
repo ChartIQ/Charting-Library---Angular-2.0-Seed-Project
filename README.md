@@ -26,10 +26,12 @@ If you have questions or get stuck using this project or the ChartIQ library, th
 These are the basic instructions to get this project running with no extra features:
 
 - Clone this repository.
-- Extract the contents of your zipped copy of the ChartIQ library and use the .tgz extension file for npm installation of library
-  `npm i ./chartiq-7.2.0.tgz`
-- Run `npm install` to install rest of dependencies.
-- Run `npm start` to start up the dev server.
+- Extract the contents of your zipped ChartIQ library package.
+- Copy the .tgz extension file from the extracted library package into the root of this project.
+- Run the following commands from the root of this project:
+  - `npm i ./chartiq-7.2.0.tgz` to install the charting library.
+  - `npm install` to install the rest of the dependencies.
+  - `npm start` to start up the dev server.
 - Open your browser to [`http://localhost:4200`](http://localhost:4200).
 
 ## Enbalig TFC plugin
