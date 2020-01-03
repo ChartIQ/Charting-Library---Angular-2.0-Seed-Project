@@ -30,7 +30,7 @@ These are the basic instructions to get this project running with no extra featu
 - Extract the contents of your zipped ChartIQ library package.
 - Copy the tarball (.tgz file) from the extracted library package into the root of this project.
 - Run the following commands from the root of this project:
-    - `npm install ./chartiq-x.x.x.tgz`to install the charting library.
+    - `npm install ./chartiq-x.x.x.tgz` to install the charting library.
     - `npm install` to install the rest of the dependencies.
     - `npm start` to start up the development server.
 - Open your browser to [http://localhost:4200](http://localhost:4200).
@@ -42,7 +42,7 @@ These are the basic instructions to get this project running with no extra featu
 
 ## Enabling IE11
 
-- Run `npm install core-js`.
+- Run `npm install core-js` .
 
 - Uncomment IE11-related imports in the `polyfills.js` file.
 
