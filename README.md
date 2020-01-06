@@ -19,7 +19,7 @@ If you have questions or get stuck using this project or the ChartIQ library, th
 
 ## Requirements
 
-* A copy of the ChartIQ library, version 7.2.0 or later.
+- A copy of the ChartIQ library, version 7.2.0 or later.
 
     Visit [https://www.chartiq.com/products/html5-charting-library/](https://www.chartiq.com/products/html5-charting-library/) to get your copy, see a demo, and get in touch with us.
 
