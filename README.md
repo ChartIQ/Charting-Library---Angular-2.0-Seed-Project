@@ -38,13 +38,13 @@ These are the basic instructions to get this project running with no extra featu
 ## Enabling TFC plugin
 
 - Uncomment the three lines following the `// to enable tfc plugin uncomment next line`
-  comment in the `src/styles.scss` and `src/app.module.ts` files.
+  comment in the *src/styles.scss* and *src/app.module.ts* files.
 
 ## Enabling IE11
 
 - Run `npm install core-js` .
 
-- Uncomment IE11-related imports in the `polyfills.js` file.
+- Uncomment IE11-related imports in the *polyfills.js* file.
 
 ## Contributing to this project
 
