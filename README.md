@@ -3,8 +3,8 @@
 - [Questions and support](#questions-and-support)
 - [Requirements](#requirements)
 - [Getting started](#getting-started)
-- [Enabling TFC plugin](#enable-tfc-plugin)
-- [Legacy IE11 support](#enable-ie11)
+- [Enabling TFC plugin](#enabling-tfc-plugin)
+- [Legacy IE11 support](#enabling-ie11)
 - [Contributing to this project](#contributing-to-this-project)
 
 
@@ -19,29 +19,33 @@ If you have questions or get stuck using this project or the ChartIQ library, th
 
 ## Requirements
 
-- A copy of the ChartIQ library, version 7.2+ is required. To get your copy, visit https://www.chartiq.com/products/html5-charting-library/ to see a demo and get in touch with us.
+- A copy of the ChartIQ library, version 7.2.0 or later.
+
+    Visit [https://www.chartiq.com/products/html5-charting-library/](https://www.chartiq.com/products/html5-charting-library/) to get your copy, see a demo, and get in touch with us.
 
 ## Getting started
 
 These are the basic instructions to get this project running with no extra features:
 
 - Clone this repository.
-- Extract the contents of your zipped copy of the ChartIQ library and use the .tgz extension file for npm installation of library
-  `npm i ./chartiq-7.2.0.tgz`
-- Run `npm install` to install rest of dependencies.
-- Run `npm start` to start up the dev server.
-- Open your browser to [`http://localhost:4200`](http://localhost:4200).
+- Extract the contents of your zipped ChartIQ library package.
+- Copy the tarball (.tgz file) from the extracted library package into the root of this project.
+- Run the following commands from the root of this project:
+    - `npm install ./chartiq-x.x.x.tgz` to install the charting library.
+    - `npm install` to install the rest of the dependencies.
+    - `npm start` to start up the development server.
+- Open your browser to [http://localhost:4200](http://localhost:4200).
 
-## Enbalig TFC plugin
+## Enabling TFC plugin
 
-- Uncomment 3 lines following the `"// to enable tfc plugin uncomment next line"`
-  in the **_src/styles.scss_** and **_src/app.module.ts_** files.
+- Uncomment the three lines following the `// to enable tfc plugin uncomment next line`
+  comment in the *src/styles.scss* and *src/app.module.ts* files.
 
 ## Enabling IE11
 
-- run `npm install core-js`
+- Run `npm install core-js` .
 
-- uncomment IE11 related imports in polyfills.js file
+- Uncomment IE11-related imports in the *polyfills.js* file.
 
 ## Contributing to this project
 
