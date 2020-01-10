@@ -43,6 +43,16 @@ export class ChartComponent implements OnInit {
 			...layout,
 			refreshInterval,
 		});
+
+		// Once the chart is created move comparison into engine created legend container
+		// to make sure of proper positioning when panels or yAxes are re-arranged
+		// currently there does not appear to be an ideomatic Angular way of doing it
+		// resolving to DOM node re-positioning
+		const comparisons = container.querySelector('.comparisons');
+		const legend = container.querySelector('.stx-panel-chart .stx-panel-legend');
+
+		legend.appendChild(comparisons);
+		legend.style.display = 'block';
 	}
 
 	showToolbar(value: boolean) {
