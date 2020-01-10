@@ -71,6 +71,7 @@ export class ChartService {
 		});
 
 		ciq.attachQuoteFeed(quoteFeedSimulator, { refreshInterval });
+		
 
 		if (symbol) {
 			ciq.loadChart(symbol);
@@ -84,12 +85,14 @@ export class ChartService {
 
 		const $series = this.$layout
 			.pipe(
-				tap(console.log),
 				filter(data => !!data),
 				map(data => Object.values(data.stx.chart.series))
 			)
 			.subscribe(this.$chartSeries);
 
+		if (!refreshInterval) setTimeout(() => {
+			ciq.resizeChart();
+		}, 300);
 		this.ciq = ciq;
 		return ciq;
 	}

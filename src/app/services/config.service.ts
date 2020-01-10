@@ -16,7 +16,7 @@ export class ConfigService {
 		timeUnit: 'day',
 	};
 
-	refreshInterval = 0;
+	refreshInterval = 1;
 	showTooltip = true;
 
 	periodicityOptions: Array<{
