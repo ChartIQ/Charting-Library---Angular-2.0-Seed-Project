@@ -90,9 +90,6 @@ export class ChartService {
 			)
 			.subscribe(this.$chartSeries);
 
-		if (!refreshInterval) setTimeout(() => {
-			ciq.resizeChart();
-		}, 300);
 		this.ciq = ciq;
 		return ciq;
 	}
