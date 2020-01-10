@@ -71,22 +71,22 @@ export class ChartService {
 		});
 
 		ciq.attachQuoteFeed(quoteFeedSimulator, { refreshInterval });
-		
 
 		if (symbol) {
 			ciq.loadChart(symbol);
 		}
 
+		// attach to window for debugging purposes
 		window['stxx'] = ciq;
+
 		// add callbacks
 		ciq.callbacks.studyOverlayEdit = params => this.openContext(params);
-
 		ciq.callbacks['layout'] = params => this.$layout.next(params);
 
-		const $series = this.$layout
+		this.$layout
 			.pipe(
 				filter(data => !!data),
-				map(data => Object.values(data.stx.chart.series))
+				map(data => Object.values(data.stx.chart.series)),
 			)
 			.subscribe(this.$chartSeries);
 
@@ -98,7 +98,7 @@ export class ChartService {
 	}
 
 	addTooltip() {
-		// new CIQ.Tooltip({ stx: this.ciq, ohl: true });
+		new CIQ.Tooltip({ stx: this.ciq, ohl: true });
 	}
 
 	openContext(params) {
