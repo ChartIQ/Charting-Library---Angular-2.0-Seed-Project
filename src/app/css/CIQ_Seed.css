@@ -728,7 +728,7 @@ ciq-colorpicker {
 
 /* #region series and comparison */
 .comparisons {
-	margin: 42px 0 0 16px;
+	margin-left: 16px;
 	float: left;
 }
 
