@@ -1,49 +1,58 @@
-import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { AppComponent } from './app.component';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {
+	NgModule,
+	CUSTOM_ELEMENTS_SCHEMA,
+	APP_INITIALIZER,
+} from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpModule } from '@angular/http';
+import { FormsModule } from '@angular/forms';
+import { HttpClientModule, HttpClient } from '@angular/common/http';
 
-import { ChartComponent } from './chart_component/chart.component';
-import { ChartService } from './chart_service/chart.service';
-import { ChartUI } from './ui_component/ui.component';
-import { Colorpicker } from './colorpicker_component/colorpicker';
-import { FilterByPropertyPipe } from './pipes/property.filter.pipe';
-import { StudyDialog } from './study_dialog_component/study.dialog.component';
-import { ThemeDialog } from './theme_dialog_component/theme.dialog.component';
-import { TimezoneDialog } from './timezone_dialog_component/timezone.dialog.component';
-import { OverlayMenu } from './overlay_menu_component/overlay.menu';
-import { DrawingToolbar } from './drawing_toolbar_component/drawing.toolbar.component';
-import { TitlecasePipe } from './pipes/title.case.pipe'
+import { AppComponent } from './app.component';
+
+import {
+	ChartUI,
+	ChartComponent,
+	OverlayMenu,
+	Colorpicker,
+	StudyDialog,
+	ThemeDialog,
+	TimezoneDialog,
+	DrawingToolbar,
+} from './components';
+
+import { MapObjectToArrayPipe, TitlecasePipe } from './pipes';
+import { ConfigService, loadConfig } from './services';
+
+import { ITfc } from './plugins/tfc.interface';
+// to enable tfc plugin uncomment next line
+// import { TfcService } from './plugins/tfc.service';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    ChartComponent,
-    ChartUI,
-    Colorpicker,
-    FilterByPropertyPipe,
-    StudyDialog,
-    ThemeDialog,
-    TimezoneDialog,
-    OverlayMenu,
-    DrawingToolbar,
-    TitlecasePipe
-  ],
-  imports: [
-    BrowserModule,
-    FormsModule,
-    HttpModule,
-    ReactiveFormsModule,
-  ],
-  providers: [
-    ChartService
-  ],
-  schemas: [
-    CUSTOM_ELEMENTS_SCHEMA
-  ],
-  bootstrap: [ AppComponent ]
+	declarations: [
+		AppComponent,
+		ChartUI,
+		ChartComponent,
+		DrawingToolbar,
+		StudyDialog,
+		ThemeDialog,
+		TimezoneDialog,
+		OverlayMenu,
+		Colorpicker,
+		MapObjectToArrayPipe,
+		TitlecasePipe,
+	],
+	imports: [BrowserModule, FormsModule, HttpClientModule],
+	schemas: [CUSTOM_ELEMENTS_SCHEMA],
+	providers: [
+		{
+			provide: APP_INITIALIZER,
+			useFactory: loadConfig,
+			deps: [HttpClient, ConfigService],
+			multi: true,
+		},
+		// to enable tfc plugin uncomment next line
+		// { provide: ITfc, useClass: TfcService },
+	],
+	bootstrap: [AppComponent],
 })
-export class AppModule {
-
-}
+export class AppModule {}

@@ -1,9 +1,0 @@
-<div id="chartContainer" class="chartContainer">
-	<div class="comparisons">
-		<div class="comparisonWrapper" *ngFor="let comparison of chartSeries">
-			<div class="chartSeriesColor" [ngStyle]="{'background-color':comparison.parameters.color}"></div>
-			<div class="chartSeries">{{comparison.display}}</div>
-			<div class="deleteSeries" (click)="removeSeries(comparison)"></div>
-		</div>
-	</div>
-</div>

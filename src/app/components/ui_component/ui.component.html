@@ -1,0 +1,137 @@
+<nav class="ciq-nav">
+	<div class="left">
+		<span class="symbol-frame">
+			<input
+				class="symbolInput"
+				placeholder="Set Symbol"
+				title="Set Symbol"
+				type="text"
+				(keyup.enter)="changeSymbol()"
+				[(ngModel)]="symbolInput"
+			/>
+			<div class="symbol-btn" (click)="changeSymbol()"></div>
+		</span>
+		<span class="symbol-frame">
+			<input
+				class="symbolCompareInput"
+				placeholder="Add Comparison"
+				title="Add Comparison"
+				type="text"
+				(keyup.enter)="addComparison()"
+				[(ngModel)]="symbolComparison"
+			/>
+			<div class="comparison-btn" (click)="addComparison()"></div>
+		</span>
+	</div>
+	<div class="right">
+		<menu-select class="theme-select" title="Select periodicity">
+			<span class="title">{{ periodicity }}</span>
+			<span class="icon"></span>
+			<menu-select-options class="menu-hover">
+				<menu-option
+					*ngFor="let period of config.periodicityOptions"
+					class="radio-menu"
+					[class.active]="period.label == periodicity"
+					(click)="changePeriodicity(period)"
+				>
+					{{ period.label }}
+				</menu-option>
+			</menu-select-options>
+		</menu-select>
+		<menu-select class="chart-type-select top-menu" title="Select chart type">
+			<span class="title">Display</span>
+			<span class="icon"></span>
+			<menu-select-options class="menu-hover">
+				<menu-option
+					*ngFor="let type of config.chartTypes"
+					class="radio-menu"
+					[class.active]="chartType == type.label"
+					(click)="changeChartType(type)"
+				>
+					{{ type.label }}
+				</menu-option>
+			</menu-select-options>
+		</menu-select>
+		<menu-select class="study-select top-menu" title="Add study">
+			<span class="title">Studies</span>
+			<span class="icon"></span>
+			<menu-select-options>
+				<menu-option
+					*ngFor="let study of studiesList"
+					(click)="addStudy(study)"
+				>
+					{{ study }}
+				</menu-option>
+			</menu-select-options>
+		</menu-select>
+		<menu-select class="theme-select top-menu" title="Select theme">
+			<span class="title">Themes</span>
+			<span class="icon"></span>
+			<ng-container *ngIf="$themes | async as themes">
+				<menu-select-options class="menu-hover">
+					<menu-option
+						*ngFor="let theme of themes.list"
+						[class.radio-menu]="theme.name != '+ New Theme'"
+						[class.active]="theme.name === themes.selected"
+						(click)="handleThemeSelect(theme)"
+						><span>{{ theme.name }}</span>
+					</menu-option>
+				</menu-select-options>
+			</ng-container>
+		</menu-select>
+		<button
+			title="Toggle crosshair"
+			class="crosshair-btn toggle-button"
+			[class.active]="$crosshair | async"
+			(click)="toggleCrosshairs()"
+		></button>
+		<button
+			title="Drawing tools"
+			class="drawing-toolbar-btn toggle-button"
+			[class.active]="showDrawing"
+			(click)="toggleDrawingToolbar()"
+		></button>
+		<button
+			title="Select timezone"
+			class="timezone-btn"
+			(click)="showTimezoneDialog()"
+		></button>
+		<button
+			[style.display]="($tfc | async) ? 'inline-block' : 'none'"
+			title="TFC"
+			class="tfc-btn"
+			(click)="toggleTFC()"
+		></button>
+	</div>
+</nav>
+<!-- The components -->
+<div class="ciq-chart-area" [class.toolbar-on]="$toolbarActive | async">
+	<div class="chart-content">
+		<drawing-toolbar
+			#drawingToolbar
+			[chartContainer]="chartComponent"
+		></drawing-toolbar>
+		<chart #chartComponent></chart>
+	</div>
+	<cq-side-panel>
+		<div class="tfc-load-info">
+			Loading TFC ...
+		</div>
+	</cq-side-panel>
+</div>
+<div class="ciq-footer">
+	<div class="ciq-span-links">
+		<div
+			*ngFor="let footerLink of config.footerSpanSizes"
+			(click)="setSpan(footerLink.span, footerLink.unit)"
+			class="ciq-footer-link"
+		>
+			{{ footerLink.label }}
+		</div>
+	</div>
+</div>
+<study-dialog #studyDialog></study-dialog>
+<theme-dialog #themeDialog></theme-dialog>
+<timezone-dialog #timezoneDialog></timezone-dialog>
+<ciq-colorpicker #colorpicker></ciq-colorpicker>
+<overlay-menu></overlay-menu>

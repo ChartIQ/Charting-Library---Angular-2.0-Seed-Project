@@ -1,14 +1,17 @@
 # Angular seed project
 
-[ ![Codeship Status for ChartIQ/Charting-Library---Angular-Seed-Project](https://app.codeship.com/projects/0b85d6c0-4010-0135-fa79-62e905eb1dfe/status?branch=master)](https://app.codeship.com/projects/229967)
-[![dependencies Status](https://david-dm.org/ChartIQ/Charting-Library---Angular-2.0-Seed-Project/status.svg)](https://david-dm.org/ChartIQ/Charting-Library---Angular-2.0-Seed-Project)
-
 - [Questions and support](#questions-and-support)
 - [Requirements](#requirements)
 - [Getting started](#getting-started)
+- [Enabling TFC plugin](#enabling-tfc-plugin)
+- [Legacy IE11 support](#enabling-ie11)
 - [Contributing to this project](#contributing-to-this-project)
 
-A basic build of the ChartIQ library within the Angular 4.0 framework. This provides an example of how to implement the most common elements in the charting library. This is not a comprehensive example, more like a good starting point for an Angular developer.
+
+A basic build of the ChartIQ library using the Angular 8.0 framework with [Angular CLI](https://cli.angular.io) support.
+This provides an example of how to implement the most common elements in the charting library.
+This is not a comprehensive example, more like a good starting point for an Angular developer.
+[Here is a live demo of the Angular Seed Project.](https://demo.chartiq.com/angular-seed/)
 
 ## Questions and support
 
@@ -16,23 +19,33 @@ If you have questions or get stuck using this project or the ChartIQ library, th
 
 ## Requirements
 
-- A copy of the ChartIQ library, version 3.0+ is required. To get your copy, visit https://www.chartiq.com/products/html5-charting-library/ to see a demo and get in touch with us.
-- [node.js](https://nodejs.org/) installed version 5+
-- NPM installed (version 3+) or [Yarn](https://yarnpkg.com/en/)
+- A copy of the ChartIQ library, version 7.2.0 or later.
 
+    Visit [https://www.chartiq.com/products/html5-charting-library/](https://www.chartiq.com/products/html5-charting-library/) to get your copy, see a demo, and get in touch with us.
 
 ## Getting started
 
-- Clone this repository.
-- Extract the contents of your zipped copy of the ChartIQ library into `src/chartiq_library/`. You should now have the folders `src/chartiq_library/css` and `src/chartiq_library/js`. You may be prompted about overwriting the contents of `src/chartiq_librar/js`. These pre-existing files are just stub files and should be overwritten. If you have any questions about where these files should go, follow their expected path backwards from either the `chart.service.ts` or `chart.component.ts`.
-- Run `npm install` to install dependencies. It is strongly recommended to not have any of the dependencies installed globally.
-- Run `npm start` to start up the dev server.
-- Open your browser to [`http://localhost:3000`](http://localhost:3000).
-  - ***If you have not already replaced `chartiq.js` and `quoteFeedSimulator.js` with your copies from the library zip you will see errors in the console reminding you to do so.***
-- If you want to use another port, open `package.json` file, then change the `server` script from `--port 3000` to the desired port number. A full list of webpack-dev-server command line options can be found [here](https://webpack.js.org/api/cli/#common-options).
+These are the basic instructions to get this project running with no extra features:
 
-## Working with Plugins
-To see an example of how to implement a ChartIQ library plugin check out the [cryptoiq-plugin branch](https://github.com/ChartIQ/Charting-Library---Angular-Seed-Project/tree/cryptoiq-plugin)
+- Clone this repository.
+- Extract the contents of your zipped ChartIQ library package.
+- Copy the tarball (.tgz file) from the extracted library package into the root of this project.
+- Run the following commands from the root of this project:
+    - `npm install ./chartiq-x.x.x.tgz` to install the charting library.
+    - `npm install` to install the rest of the dependencies.
+    - `npm start` to start up the development server.
+- Open your browser to [http://localhost:4200](http://localhost:4200).
+
+## Enabling TFC plugin
+
+- Uncomment the three lines following the `// to enable tfc plugin uncomment next line`
+  comment in the *src/styles.scss* and *src/app.module.ts* files.
+
+## Enabling IE11
+
+- Run `npm install core-js` .
+
+- Uncomment IE11-related imports in the *polyfills.js* file.
 
 ## Contributing to this project
 

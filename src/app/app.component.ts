@@ -1,8 +1,8 @@
-import {Component} from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 
 @Component({
-  selector: 'body',
-  template: '<chart-ui></chart-ui>',
+	selector: 'app-root',
+	templateUrl: './app.component.html',
+	encapsulation: ViewEncapsulation.None,
 })
-export class AppComponent {
-}
+export class AppComponent {}

@@ -1,36 +1,26 @@
 {
-  "compilerOptions": {
-    "allowJs": true,
-    "allowUnreachableCode":true,
-    "baseUrl": ".",
-    "target": "es5",
-    "module": "commonjs",
-    "outDir": "dist",
-    "rootDir": ".",
-    "sourceMap": true,
-    "emitDecoratorMetadata": true,
-    "experimentalDecorators": true,
-    "moduleResolution": "node",
-    "paths": {
-      "*": [
-          "src/chartiq_library/js/*",
-        ]
-      },
-    "typeRoots": [
-      "node_modules/@types"
-    ],
-    "lib": ["es6", "dom"]
-  },
-  "exclude": [
-    "node_modules"
-  ],
-  "awesomeTypescriptLoaderOptions": {
-    "useWebpackText": true
-  },
-  "angularCompilerOptions": {
-    "debug": false
-  },
-  "compileOnSave": false,
-  "buildOnSave": false,
-  "atom": { "rewriteTsconfig": false }
+	"compileOnSave": false,
+	"compilerOptions": {
+		"baseUrl": "./",
+		"outDir": "./dist/out-tsc",
+		"sourceMap": true,
+		"declaration": false,
+		"downlevelIteration": true,
+		"experimentalDecorators": true,
+		"module": "esnext",
+		"moduleResolution": "node",
+		"paths": {
+			// following mapping is used only if chartiq is not npm installed and placed in source
+			// "chartiq/*": ["src/chartiq_library/*"],
+			// "chartiq": ["src/chartiq_library/js/chartiq.js"]
+		},
+		"importHelpers": true,
+		"target": "es5",
+		"typeRoots": ["node_modules/@types"],
+		"lib": ["es2018", "dom"]
+	},
+	"angularCompilerOptions": {
+		"fullTemplateTypeCheck": true,
+		"strictInjectionParameters": true
+	}
 }
