@@ -165,6 +165,10 @@ export class ChartUI implements OnInit, OnDestroy {
 		);
 	}
 
+	addTSE() {
+		this.chartService.addTSE();
+	}
+
 	ngOnDestroy() {
 		this.unsubscribe.unsubscribe();
 	}

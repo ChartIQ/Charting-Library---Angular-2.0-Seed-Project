@@ -32,6 +32,8 @@ export class ChartService {
 	tfcOpen = false;
 	$tfc = new BehaviorSubject<any>(undefined);
 
+	tse: any;
+
 	constructor(
 		private config: ConfigService,
 		@Optional() private tfcService: ITfc
@@ -63,6 +65,7 @@ export class ChartService {
 			interval = 1,
 			timeUnit = 'day',
 			refreshInterval = 0,
+			bufferSize = 200
 		} = {}
 	) {
 		const ciq = new CIQ.ChartEngine({
@@ -70,7 +73,7 @@ export class ChartService {
 			layout: { periodicity, interval, timeUnit },
 		});
 
-		ciq.attachQuoteFeed(quoteFeedSimulator, { refreshInterval });
+		ciq.attachQuoteFeed(quoteFeedSimulator, { refreshInterval, bufferSize });
 
 		if (symbol) {
 			ciq.loadChart(symbol);
@@ -356,6 +359,17 @@ export class ChartService {
 				openPanel(contextContainer, this.tfcOpen);
 			});
 		}
+	}
+
+	addTSE () {
+		if (!this.tse) {
+			new CIQ.TimeSpanEventPanel({ stx: this.ciq });
+			this.tse = new CIQ.TimeSpanEventSample(this.ciq);
+		}
+
+		this.tse.showTimeSpanEvent('CEO');
+		this.tse.showTimeSpanEvent('Order');
+		this.tse.showTimeSpanEvent('News');
 	}
 
 	destroyChart() {

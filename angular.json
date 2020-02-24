@@ -32,6 +32,11 @@
 								"glob": "**/*",
 								"input": "src/assets",
 								"output": "/resources/"
+							},
+							{
+								"glob": "**/*",
+								"input": "node_modules/chartiq/plugins/timespanevent/images",
+								"output": "plugins/timespanevent/images"
 							}
 						],
 						"styles": ["src/styles.scss"],

@@ -27,6 +27,10 @@ import { ITfc } from './plugins/tfc.interface';
 // to enable tfc plugin uncomment next line
 // import { TfcService } from './plugins/tfc.service';
 
+
+import "chartiq/plugins/timespanevent/timespanevent";
+import "chartiq/plugins/timespanevent/examples/timeSpanEventSample"; 
+
 @NgModule({
 	declarations: [
 		AppComponent,
