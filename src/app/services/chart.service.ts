@@ -203,7 +203,10 @@ export class ChartService {
 	}
 
 	getDrawingToolList() {
-		const list = CIQ.Drawing.getDrawingToolList({});
+	const list = CIQ.Drawing.getDrawingToolList({
+		'ciqInheritsFrom':true,
+		'stxInheritsFrom':true
+	});
 		return Object.keys(list).sort();
 	}
 
