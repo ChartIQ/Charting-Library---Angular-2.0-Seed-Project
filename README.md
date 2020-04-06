@@ -11,7 +11,7 @@
 A basic build of the ChartIQ library using the Angular 8.0 framework with [Angular CLI](https://cli.angular.io) support.
 This provides an example of how to implement the most common elements in the charting library.
 This is not a comprehensive example, more like a good starting point for an Angular developer.
-[Here is a live demo of the Angular Seed Project.](https://demo.chartiq.com/angular-seed/)
+
 
 ## Questions and support
 
