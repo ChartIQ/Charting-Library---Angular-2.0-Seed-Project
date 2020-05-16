@@ -3,6 +3,7 @@
 - [Questions and support](#questions-and-support)
 - [Requirements](#requirements)
 - [Getting started](#getting-started)
+- [Enabling AddOns](#enabling-addons)
 - [Enabling TFC plugin](#enabling-tfc-plugin)
 - [Legacy IE11 support](#enabling-ie11)
 - [Contributing to this project](#contributing-to-this-project)
@@ -35,6 +36,12 @@ These are the basic instructions to get this project running with no extra featu
     - `npm install` to install the rest of the dependencies.
     - `npm start` to start up the development server.
 - Open your browser to [http://localhost:4200](http://localhost:4200).
+
+
+## Enabling addOns
+
+Prior to an addOn initiation the addOn module has to be loaded. In this application addOns are imported dynamically
+as and provided as chart service methods toggleRangeSlider and addTooltip.
 
 ## Enabling TFC plugin
 
