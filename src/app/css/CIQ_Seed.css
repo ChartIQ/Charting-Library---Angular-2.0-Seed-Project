@@ -99,6 +99,11 @@ cq-side-panel {
 	font-weight: 700;
 	margin: 10px;
 }
+
+/* Hide title in range slider */
+.ciq-chart .stx-panel-title {
+	display: none;
+}
 /* #endregion chart adjustments */
 
 /* #region special switches */

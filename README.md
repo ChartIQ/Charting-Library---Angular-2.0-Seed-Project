@@ -2,6 +2,7 @@
 
 - [Requirements](#requirements)
 - [Getting started](#getting-started)
+- [Enabling add-ons](#enabling-add\-ons)
 - [Enabling the TFC plug-in](#enabling-the-tfc-plug\-in)
 - [Questions and support](#questions-and-support)
 - [Contributing to this project](#contributing-to-this-project)
@@ -31,6 +32,12 @@ To implement this project, do the following:
     - `npm install` to install the rest of the dependencies
     - `npm start` to start up the development server
 5. Open your browser to [http://localhost:4200](http://localhost:4200) to see the working application
+
+
+## Enabling add-ons
+
+Prior to an addOn initiation the addOn module has to be loaded. In this application addOns are imported dynamically
+as and provided as chart service methods toggleRangeSlider and addTooltip.
 
 ## Enabling the TFC plug-in
 
