@@ -1,53 +1,57 @@
-# Angular seed project
+# ChartIQ Angular Seed Project
 
-- [Questions and support](#questions-and-support)
 - [Requirements](#requirements)
 - [Getting started](#getting-started)
-- [Enabling TFC plugin](#enabling-tfc-plugin)
-- [Legacy IE11 support](#enabling-ie11)
+- [Enabling the TFC plug-in](#enabling-the-tfc-plug\-in)
+- [Questions and support](#questions-and-support)
 - [Contributing to this project](#contributing-to-this-project)
 
+The ChartIQ Angular seed project is a basic build of the ChartIQ library using the Angular 8.0 framework with [Angular CLI](https://cli.angular.io) support.
 
-A basic build of the ChartIQ library using the Angular 8.0 framework with [Angular CLI](https://cli.angular.io) support.
-This provides an example of how to implement the most common elements in the charting library.
-This is not a comprehensive example, more like a good starting point for an Angular developer.
+The project is an example of how to implement the most common elements in the charting library.
+The project is a good starting point for Angular developers.
 
-
-## Questions and support
-
-If you have questions or get stuck using this project or the ChartIQ library, the dev support team can be reached through [dev@chartiq.com](mailto:dev@chartiq.com).
+For an example implementation of a wide range of charting capabilities, see the [chartiq-angular-app](https://github.com/ChartIQ/chartiq-angular-app) project.
 
 ## Requirements
 
 - A copy of the ChartIQ library, version 7.2.0 or later.
 
-    Visit [https://www.chartiq.com/products/html5-charting-library/](https://www.chartiq.com/products/html5-charting-library/) to get your copy, see a demo, and get in touch with us.
+    If you do not have a copy of the library, please contact your ChartIQ account manager or send an email to [support@chartiq.com](mailto:support@chartiq.com).
 
 ## Getting started
 
-These are the basic instructions to get this project running with no extra features:
+To implement this project, do the following:
 
-- Clone this repository.
-- Extract the contents of your zipped ChartIQ library package.
-- Copy the tarball (.tgz file) from the extracted library package into the root of this project.
-- Run the following commands from the root of this project:
-    - `npm install ./chartiq-x.x.x.tgz` to install the charting library.
-    - `npm install` to install the rest of the dependencies.
-    - `npm start` to start up the development server.
-- Open your browser to [http://localhost:4200](http://localhost:4200).
+1. Clone the repository
+2. Extract the contents of your zipped ChartIQ library package
+3. Copy the tarball (.tgz file) from the extracted library package into the root of this project
+4. Run the following commands from the root of the project:
+    - `npm install ./chartiq-x.x.x.tgz` to install the charting library
+    - `npm install` to install the rest of the dependencies
+    - `npm start` to start up the development server
+5. Open your browser to [http://localhost:4200](http://localhost:4200) to see the working application
 
-## Enabling TFC plugin
+## Enabling the TFC plug-in
 
-- Uncomment the three lines following the `// to enable tfc plugin uncomment next line`
-  comment in the *src/styles.scss* and *src/app.module.ts* files.
+The Trade from the Chart (TFC) plug-in enables users to place trades directly from a ChartIQ chart. The plug-in includes tools for placing market orders, limit and stop orders, and multi-leg orders.
 
-## Enabling IE11
+The plug-in is built into this project but is disabled.
 
-- Run `npm install core-js` .
+To enable the plug-in, uncomment the following lines of code:
+- *src/app.module.ts*
+  - // import { TfcService } from './plugins/tfc.service';
+  - // { provide: ITfc, useClass: TfcService },
+- *src/styles/scss*
+  - // @import '~chartiq/plugins/tfc/tfc.css';
 
-- Uncomment IE11-related imports in the *polyfills.js* file.
+**Note:** Each line of code follows the comment: `// to enable tfc plugin uncomment next line`
+
+## Questions and support
+
+- Contact our development support team at [support@chartiq.com](mailto:support@chartiq.com).
+- See our SDK documentation at https://documentation.chartiq.com.
 
 ## Contributing to this project
 
-If you wish to contribute to this project, fork it and send us a pull request.
-We'd love to see what it is you want to do with our charting tools!
+Contribute to this project. Fork it and send us a pull request. We'd love to see what you can do with our charting tools!
