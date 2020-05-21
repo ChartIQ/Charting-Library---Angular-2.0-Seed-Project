@@ -9,14 +9,13 @@
 
 The ChartIQ Angular seed project is a basic build of the ChartIQ library using the Angular 8.0 framework with [Angular CLI](https://cli.angular.io) support.
 
-The project is an example of how to implement the most common elements in the charting library.
-The project is a good starting point for Angular developers.
+The project is an example of how to implement the most common user interface elements of the ChartIQ API using native Angular components. The project is a good starting point for developers who want to create a UI entirely in Angular.
 
-For an example implementation of a wide range of charting capabilities, see the [chartiq-angular-app](https://github.com/ChartIQ/chartiq-angular-app) project.
+For example implementations of full-featured user interfaces built with ChartIQ's web components, see the [chartiq-angular-app](https://github.com/ChartIQ/chartiq-angular-app) project.
 
 ## Requirements
 
-- A copy of the ChartIQ library, version 7.2.0 or later.
+- A copy of the ChartIQ library, version 7.5.0 or later.
 
     If you do not have a copy of the library, please contact your ChartIQ account manager or send an email to [support@chartiq.com](mailto:support@chartiq.com).
 
@@ -33,11 +32,58 @@ To implement this project, do the following:
     - `npm start` to start up the development server
 5. Open your browser to [http://localhost:4200](http://localhost:4200) to see the working application
 
-
 ## Enabling add-ons
 
-Prior to an addOn initiation the addOn module has to be loaded. In this application addOns are imported dynamically
-as and provided as chart service methods toggleRangeSlider and addTooltip.
+The ChartIQ library includes a variety of add-ons which enhance the functionality of charts. For example,
+the [RangeSlider](https://documentation.chartiq.com/CIQ.RangeSlider.html) add-on enables users to select a range of chart data using an interactive slider.
+
+See the &ldquo;Add-Ons&rdquo; section of the [API Reference](https://documentation.chartiq.com/tutorial-SDK%20API%20Reference.html) for a complete list of add-ons.
+
+### Built-in add-ons
+
+In this seed project, the [RangeSlider](https://documentation.chartiq.com/CIQ.RangeSlider.html) and [Tooltip](https://documentation.chartiq.com/CIQ.Tooltip.html) add-ons are built in. The add-ons are imported dynamically and instantiated in the `toggleRangeSlider` and `addTooltip` methods (respectively) of `ChartService` (see *chart.service.ts*).
+
+The `addTooltip` method is called when the `showTooltip` property of `ConfigService` is true (see *config.service.ts*). The [Tooltip](https://documentation.chartiq.com/CIQ.Tooltip.html) add-on works in conjuction with the chart crosshairs. The add-on creates a tooltip-like display of information for the data point at the crosshairs location. To see the tooltip, enable the chart crosshairs and move your mouse across the chart.
+
+To enable a [RangeSlider](https://documentation.chartiq.com/CIQ.RangeSlider.html), add the following method call to the `createChart` method of `ChartService`:
+```ts
+this.toggleRangeSlider(true);
+```
+
+The call must come after the assignment of the chart engine (`ciq`) to `ChartService`; for example (at the bottom of `createChart`):
+```ts
+this.ciq = ciq;
+this.toggleRangeSlider(true);
+```
+
+### All add-ons
+
+Any add-on can be included in your project by doing the following:
+1. Import the ChartIQ add-on source files (*chartiq/js/addOns*)
+2. Create and initialize an instance of the add-on
+
+For example, the [FullScreen](https://documentation.chartiq.com/CIQ.FullScreen.html) add-on creates a toggle control that enables the chart to occupy the entire display area of a device.
+
+To include the [FullScreen](https://documentation.chartiq.com/CIQ.FullScreen.html) add-on:
+1. Add the following import to the top of *chart.service.ts*:
+   ```ts
+   import 'chartiq/js/addOns';
+   ```
+2. Add the following constructor function call to the `createChart` method of `ChartService`:
+   ```ts
+   new CIQ.FullScreen({ stx: ciq });
+   ```
+
+   The call must come after the chart engine has been instantiated; for example:
+   ```ts
+   const ciq = new CIQ.ChartEngine({
+       container,
+       layout: { periodicity, interval, timeUnit },
+   });
+   new CIQ.FullScreen({ stx: ciq });
+   ```
+
+A control is added to the bottom of the chart, next to the zoom controls (**-**&nbsp;**+**). Select the control to expand (and contract) the chart display.
 
 ## Enabling the TFC plug-in
 
@@ -53,6 +99,8 @@ To enable the plug-in, uncomment the following lines of code:
   - // @import '~chartiq/plugins/tfc/tfc.css';
 
 **Note:** Each line of code follows the comment: `// to enable tfc plugin uncomment next line`
+
+Open the Trade from the Chart panel by selecting the TFC control in the upper right corner of the chart.
 
 ## Questions and support
 
