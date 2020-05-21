@@ -360,6 +360,7 @@ export class ChartService {
 			this.tfcInit = true;
 			const context = {
 				changeSymbol: symbol => this.changeSymbol(symbol),
+				topNode: contextContainer
 			};
 
 			loadPlugin({

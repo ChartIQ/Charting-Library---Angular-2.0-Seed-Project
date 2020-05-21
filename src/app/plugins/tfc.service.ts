@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ITfc } from './tfc.interface';
+import { CIQ } from 'chartiq/js/chartiq';
 
 @Injectable()
 export class TfcService extends ITfc {
@@ -19,11 +20,14 @@ export class TfcService extends ITfc {
 				{
 					CIQ: { TFC, Account },
 				},
-			]) => new TFC({
+			]) => {
+				CIQ.UI.ensureComponentsRegistered();
+				new TFC({
 					stx,
 					context,
 					account: Account.Demo,
-				})
+				});
+			}
 		);
 	}
 
