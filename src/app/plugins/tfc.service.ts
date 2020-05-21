@@ -21,7 +21,7 @@ export class TfcService extends ITfc {
 					CIQ: { TFC, Account },
 				},
 			]) => {
-				CIQ.UI.ensureComponentsRegistered();
+				if (CIQ.UI.ensureComponentsRegistered) CIQ.UI.ensureComponentsRegistered();
 				new TFC({
 					stx,
 					context,
