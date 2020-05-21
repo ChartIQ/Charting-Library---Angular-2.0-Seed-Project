@@ -65,10 +65,13 @@ Any add-on can be included in your project by doing the following:
 For example, the [FullScreen](https://documentation.chartiq.com/CIQ.FullScreen.html) add-on creates a toggle control that enables the chart to occupy the entire display area of a device.
 
 To include the [FullScreen](https://documentation.chartiq.com/CIQ.FullScreen.html) add-on:
-1. Add the following import to the top of *chart.service.ts*:
+1. Add the following static import to the top of *chart.service.ts*:
    ```ts
    import 'chartiq/js/addOns';
    ```
+
+   **Note:** With the static import of *chartiq/js/addOns* added to the file, you could remove the dynamic import statements in the `toggleRangeSlider` and `addTooltip` methods.
+
 2. Add the following constructor function call to the `createChart` method of `ChartService`:
    ```ts
    new CIQ.FullScreen({ stx: ciq });
@@ -82,6 +85,7 @@ To include the [FullScreen](https://documentation.chartiq.com/CIQ.FullScreen.htm
    });
    new CIQ.FullScreen({ stx: ciq });
    ```
+
 
 A control is added to the bottom of the chart, next to the zoom controls (**-**&nbsp;**+**). Select the control to expand (and contract) the chart display.
 
