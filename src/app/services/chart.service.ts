@@ -48,10 +48,7 @@ export class ChartService {
 		this.$themes.next(this.themes);
 
 		if (this.config.showTooltip) {
-			// required for tooltip comment out to disable
-			import('chartiq/js/addOns').then(addOns => {
-				this.addTooltip();
-			});
+			this.addTooltip();
 		}
 	}
 
@@ -78,6 +75,7 @@ export class ChartService {
 
 		// attach to window for debugging purposes
 		window['stxx'] = ciq;
+		window['toggleRangeSlider'] = this.toggleRangeSlider.bind(this);
 
 		// add event listeners
 		ciq.addEventListener('studyOverlayEdit', params => this.openContext(params));
@@ -95,7 +93,9 @@ export class ChartService {
 	}
 
 	addTooltip() {
-		new CIQ.Tooltip({ stx: this.ciq, ohl: true });
+		import('chartiq/js/addOns').then(() => {
+			new CIQ.Tooltip({ stx: this.ciq, ohl: true });
+		});
 	}
 
 	openContext(params) {
@@ -147,6 +147,20 @@ export class ChartService {
 		const { layout } = this.ciq;
 		layout.crosshair = value !== null ? value : !layout.crosshair;
 		this.$chrosshair.next(layout.crosshair);
+	}
+
+	// If value is provided the function works as set method
+	toggleRangeSlider(value) {
+		const { ciq: stx } = this;
+		if (typeof value === 'undefined') {
+			value = !stx.layout.rangeSlider;
+		}
+		stx.layout.rangeSlider = value;
+	
+		import('chartiq/js/addOns').then(() => {
+			if (!stx.slider) new CIQ.RangeSlider({ stx });
+			stx.slider.display(stx.layout.rangeSlider ? 1 : 0);
+		});
 	}
 
 	getLibraryStudyNames() {
@@ -346,6 +360,7 @@ export class ChartService {
 			this.tfcInit = true;
 			const context = {
 				changeSymbol: symbol => this.changeSymbol(symbol),
+				topNode: contextContainer
 			};
 
 			loadPlugin({
