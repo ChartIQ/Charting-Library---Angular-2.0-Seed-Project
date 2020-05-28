@@ -3,7 +3,7 @@ import { BehaviorSubject, ReplaySubject } from 'rxjs';
 import { map, filter, tap } from 'rxjs/operators';
 
 import { CIQ } from 'chartiq/js/chartiq';
-import { quoteFeedSimulator } from 'chartiq/examples/feeds/quoteFeedSimulator';
+import quoteFeedSimulator from 'chartiq/examples/feeds/quoteFeedSimulator';
 
 import { ConfigService } from './config.service';
 import { ITfc } from '../plugins/tfc.interface';
@@ -79,9 +79,9 @@ export class ChartService {
 		// attach to window for debugging purposes
 		window['stxx'] = ciq;
 
-		// add callbacks
-		ciq.callbacks.studyOverlayEdit = params => this.openContext(params);
-		ciq.callbacks['layout'] = params => this.$layout.next(params);
+		// add event listeners
+		ciq.addEventListener('studyOverlayEdit', params => this.openContext(params));
+		ciq.addEventListener('layout', params => this.$layout.next(params));
 
 		this.$layout
 			.pipe(
