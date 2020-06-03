@@ -21,7 +21,7 @@ For example implementations of full-featured user interfaces built with ChartIQ'
 
 ## Getting started
 
-To implement this project, do the following:
+To implement this project:
 
 1. Clone the repository
 2. Extract the contents of your zipped ChartIQ library package
@@ -77,7 +77,7 @@ To include the [FullScreen](https://documentation.chartiq.com/CIQ.FullScreen.htm
    new CIQ.FullScreen({ stx: ciq });
    ```
 
-   The call must come after the chart engine has been instantiated; for example:
+   The call must come after the chart engine has been instantiated, for example:
    ```ts
    const ciq = new CIQ.ChartEngine({
        container,
