@@ -2,7 +2,9 @@ import { Injectable, Optional } from '@angular/core';
 import { BehaviorSubject, ReplaySubject } from 'rxjs';
 import { map, filter, tap } from 'rxjs/operators';
 
-import { CIQ } from 'chartiq/js/chartiq';
+import { CIQ } from 'chartiq/js/standard.js';
+import 'chartiq/js/advanced.js';
+
 import quoteFeedSimulator from 'chartiq/examples/feeds/quoteFeedSimulator';
 
 import { ConfigService } from './config.service';
