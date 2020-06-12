@@ -25,7 +25,7 @@ import { ConfigService, loadConfig } from './services';
 
 import { ITfc } from './plugins/tfc.interface';
 // to enable tfc plugin uncomment next line
-import { TfcService } from './plugins/tfc.service';
+// import { TfcService } from './plugins/tfc.service';
 
 @NgModule({
 	declarations: [
@@ -51,7 +51,7 @@ import { TfcService } from './plugins/tfc.service';
 			multi: true,
 		},
 		// to enable tfc plugin uncomment next line
-		{ provide: ITfc, useClass: TfcService },
+		// { provide: ITfc, useClass: TfcService },
 	],
 	bootstrap: [AppComponent],
 })

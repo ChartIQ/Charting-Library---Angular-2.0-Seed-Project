@@ -65,7 +65,7 @@ Any add-on can be included in your project by doing the following:
 For example, the [FullScreen](https://documentation.chartiq.com/CIQ.FullScreen.html) add-on creates a toggle control that enables the chart to occupy the entire display area of a device.
 
 To include the [FullScreen](https://documentation.chartiq.com/CIQ.FullScreen.html) add-on:
-1. Add the following static import to the top of *chart.service.ts*:
+1. Add the following static import to the top of *src/app/services/chart.service.ts*:
    ```ts
    import 'chartiq/js/addOns';
    ```
@@ -96,7 +96,7 @@ The Trade from the Chart (TFC) plug-in enables users to place trades directly fr
 The plug-in is built into this project but is disabled.
 
 To enable the plug-in, uncomment the following lines of code:
-- *src/app.module.ts*
+- *src/app/app.module.ts*
   - // import { TfcService } from './plugins/tfc.service';
   - // { provide: ITfc, useClass: TfcService },
 - *src/styles/scss*
