@@ -98,13 +98,13 @@ The plug-in is built into this project but is disabled.
 To enable the plug-in, uncomment the following lines of code:
 - *src/app/app.module.ts*
 ```js
- // import { TfcService } from './plugins/tfc.service';
+  // import { TfcService } from './plugins/tfc.service';
 
- // { provide: ITfc, useClass: TfcService }
+  // { provide: ITfc, useClass: TfcService }
 ```
 - *src/styles/scss*
 ```scss
- // @import '~chartiq/plugins/tfc/tfc.css';
+  // @import '~chartiq/plugins/tfc/tfc.css';
 ```
 
 **Note:** Each line of code follows the comment: `// to enable tfc plugin uncomment next line`
