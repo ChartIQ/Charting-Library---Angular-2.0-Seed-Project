@@ -30,7 +30,7 @@ To implement this project:
     - `npm install ./chartiq-x.x.x.tgz` to install the charting library
     - `npm install` to install the rest of the dependencies
     - `npm start` to start up the development server
-5. Open your browser to [http://localhost:4200](http://localhost:4200) to see the working application
+5. Open your browser to [http://localhost:4200](http://localhost:4200) to load the application
 
 ## Enabling add-ons
 
