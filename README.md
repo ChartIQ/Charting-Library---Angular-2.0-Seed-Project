@@ -15,7 +15,7 @@ For example implementations of full-featured user interfaces built with ChartIQ'
 
 ## Requirements
 
-- A copy of the ChartIQ library, version 7.5.0 or later.
+- A copy of the ChartIQ library, version 8.0.0 or later.
 
     If you do not have a copy of the library, please contact your ChartIQ account manager or send an email to [support@chartiq.com](mailto:support@chartiq.com).
 
@@ -97,10 +97,14 @@ The plug-in is built into this project but is disabled.
 
 To enable the plug-in, uncomment the following lines of code:
 - *src/app/app.module.ts*
-  - // import { TfcService } from './plugins/tfc.service';
-  - // { provide: ITfc, useClass: TfcService },
+```js
+   // import { TfcService } from './plugins/tfc.service';
+   // { provide: ITfc, useClass: TfcService }
+```
 - *src/styles/scss*
-  - // @import '~chartiq/plugins/tfc/tfc.css';
+```scss
+   // @import '~chartiq/plugins/tfc/tfc.css';
+```
 
 **Note:** Each line of code follows the comment: `// to enable tfc plugin uncomment next line`
 
