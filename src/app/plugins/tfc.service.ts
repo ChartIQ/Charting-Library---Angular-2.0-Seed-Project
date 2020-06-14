@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ITfc } from './tfc.interface';
-import { CIQ } from 'chartiq/js/chartiq';
+import { CIQ } from 'chartiq/js/chartiq.js';
 
 @Injectable()
 export class TfcService extends ITfc {
@@ -14,18 +14,14 @@ export class TfcService extends ITfc {
 			import('chartiq/plugins/tfc/tfc-loader'),
 			// @ts-ignore /* prevent compile failure when tfc plugin is not available as part of library */
 			import('chartiq/plugins/tfc/tfc-demo'),
-			import('chartiq/js/components'),
-		]).then(
-			([
-				{
-					CIQ: { TFC, Account },
-				},
-			]) => {
+			import('chartiq/js/components.js'), // use sidepanel.js if available instead of components.js
+			// import('chartiq/js/webcomponents/sidepanel.js'),
+		]).then(() => {
 				if (CIQ.UI.ensureComponentsRegistered) CIQ.UI.ensureComponentsRegistered();
-				new TFC({
+				new CIQ.TFC({
 					stx,
 					context,
-					account: Account.Demo,
+					account: CIQ.Account.Demo,
 				});
 			}
 		);
