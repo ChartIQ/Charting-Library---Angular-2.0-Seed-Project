@@ -1,5 +1,8 @@
 # ChartIQ Angular Seed Project
 
+## Contents
+
+- [Overview](#overview)
 - [Requirements](#requirements)
 - [Getting started](#getting-started)
 - [Enabling add-ons](#enabling-add\-ons)
@@ -7,11 +10,13 @@
 - [Questions and support](#questions-and-support)
 - [Contributing to this project](#contributing-to-this-project)
 
+## Overview
+
 The ChartIQ Angular seed project is a basic build of the ChartIQ library using the Angular 8.0 framework with [Angular CLI](https://cli.angular.io) support.
 
 The project is an example of how to implement the most common user interface elements of the ChartIQ API using native Angular components. The project is a good starting point for developers who want to create a UI entirely in Angular.
 
-For example implementations of full-featured user interfaces built with ChartIQ's web components, see the [chartiq-angular-app](https://github.com/ChartIQ/chartiq-angular-app) project.
+For a variety of complete charting solutions that can be easily incorporated into Angular applications, see the [chartiq-angular-app](https://github.com/ChartIQ/chartiq-angular-app) project.
 
 ## Requirements
 
