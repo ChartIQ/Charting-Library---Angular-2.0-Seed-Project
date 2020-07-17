@@ -115,7 +115,7 @@ export class ChartService {
 		this.ciq.setSpan({ multiplier, span });
 	}
 
-	changeSymbol(symbol) {
+	changeSymbol(context, symbol) {
 		this.ciq.loadChart(symbol);
 	}
 
@@ -360,7 +360,7 @@ export class ChartService {
 		if (!this.tfcInit) {
 			this.tfcInit = true;
 			const context = {
-				changeSymbol: symbol => this.changeSymbol(symbol),
+				changeSymbol: (context, symbol) => this.changeSymbol(context, symbol),
 				topNode: contextContainer
 			};
 
