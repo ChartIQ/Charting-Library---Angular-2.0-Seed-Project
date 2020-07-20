@@ -96,7 +96,7 @@ export class ChartUI implements OnInit, OnDestroy {
 	}
 
 	changeSymbol() {
-		this.chartService.changeSymbol(null, this.symbolInput);
+		this.chartService.changeSymbol(this.symbolInput);
 		this.symbolInput = '';
 	}
 
