@@ -66,11 +66,9 @@ export class ChartService {
 			refreshInterval = 0,
 		} = {}
 	) {
-		const ciq = new CIQ.ChartEngine({
-			container,
-			layout: { periodicity, interval, timeUnit },
-		});
+		const ciq = new CIQ.ChartEngine({ container });
 
+		ciq.setPeriodicity({ periodicity, interval, timeUnit });
 		ciq.setMarketFactory(CIQ.Market.Symbology.factory);
 		ciq.attachQuoteFeed(quoteFeedSimulator, { refreshInterval });
 
