@@ -362,7 +362,7 @@ export class ChartService {
 		if (!this.tfcInit) {
 			this.tfcInit = true;
 			const context = {
-				changeSymbol: symbol => this.changeSymbol(symbol),
+				changeSymbol: (context, symbol) => this.changeSymbol(symbol),
 				topNode: contextContainer
 			};
 
