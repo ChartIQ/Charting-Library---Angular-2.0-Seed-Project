@@ -9,6 +9,9 @@ import quoteFeedSimulator from 'chartiq/examples/feeds/quoteFeedSimulator';
 import { ConfigService } from './config.service';
 import { ITfc } from '../plugins/tfc.interface';
 
+import 'chartiq/examples/markets/marketDefinitionsSample'
+import 'chartiq/examples/markets/marketSymbologySample'
+
 @Injectable()
 export class ChartService {
 	ciq: any;
@@ -63,11 +66,10 @@ export class ChartService {
 			refreshInterval = 0,
 		} = {}
 	) {
-		const ciq = new CIQ.ChartEngine({
-			container,
-			layout: { periodicity, interval, timeUnit },
-		});
+		const ciq = new CIQ.ChartEngine({ container });
 
+		ciq.setPeriodicity({ periodicity, interval, timeUnit });
+		ciq.setMarketFactory(CIQ.Market.Symbology.factory);
 		ciq.attachQuoteFeed(quoteFeedSimulator, { refreshInterval });
 
 		if (symbol) {
@@ -360,7 +362,7 @@ export class ChartService {
 		if (!this.tfcInit) {
 			this.tfcInit = true;
 			const context = {
-				changeSymbol: symbol => this.changeSymbol(symbol),
+				changeSymbol: (context, symbol) => this.changeSymbol(symbol),
 				topNode: contextContainer
 			};
 

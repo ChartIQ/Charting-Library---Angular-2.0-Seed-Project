@@ -107,7 +107,7 @@ To enable the plug-in, uncomment the following lines of code:
 
   // { provide: ITfc, useClass: TfcService }
 ```
-- *src/styles/scss*
+- *src/styles.scss*
 ```scss
   // @import '~chartiq/plugins/tfc/tfc.css';
 ```
