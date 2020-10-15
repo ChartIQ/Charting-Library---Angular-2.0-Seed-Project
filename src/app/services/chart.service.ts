@@ -68,7 +68,7 @@ export class ChartService {
 	) {
 		const ciq = new CIQ.ChartEngine({ container });
 
-		ciq.setPeriodicity({ periodicity, interval, timeUnit });
+		ciq.setPeriodicity({ period: periodicity, interval, timeUnit });
 		ciq.setMarketFactory(CIQ.Market.Symbology.factory);
 		ciq.attachQuoteFeed(quoteFeedSimulator, { refreshInterval });
 
@@ -216,7 +216,7 @@ export class ChartService {
 	}
 
 	getDrawingParameters(tool) {
-		return CIQ.Drawing.getDrawingParameters(this.ciq, tool);
+		return <any>CIQ.Drawing.getDrawingParameters(this.ciq, tool);
 	}
 
 	getDrawingToolList() {
@@ -316,7 +316,7 @@ export class ChartService {
 		if (zone === null) {
 			this.ciq.defaultDisplayTimeZone = null;
 
-			CIQ.ChartEngine.registeredContainers.forEach(({ stx }) => {
+			CIQ.ChartEngine['registeredContainers'].forEach(({ stx }) => {
 				stx.displayZone = null;
 				stx.setTimeZone();
 

@@ -17,11 +17,11 @@ export class TfcService extends ITfc {
 			import('chartiq/js/components.js'), // use sidepanel.js if available instead of components.js
 			// import('chartiq/js/webcomponents/sidepanel.js'),
 		]).then(() => {
-				if (CIQ.UI.ensureComponentsRegistered) CIQ.UI.ensureComponentsRegistered();
-				new CIQ.TFC({
+				if (CIQ['UI'].ensureComponentsRegistered) CIQ['UI'].ensureComponentsRegistered();
+				new CIQ['TFC']({
 					stx,
 					context,
-					account: CIQ.Account.Demo,
+					account: CIQ['Account'].Demo,
 				});
 			}
 		);
