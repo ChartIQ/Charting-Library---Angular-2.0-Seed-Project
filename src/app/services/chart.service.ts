@@ -21,10 +21,10 @@ export class ChartService {
 	themes = this.config.themes;
 
 	$chartSeries = new BehaviorSubject([]);
-	$chrosshair = new BehaviorSubject(false);
+	$crosshair = new BehaviorSubject(false);
 
 	$layout = new BehaviorSubject<any>(null);
-	$contexMenu = new BehaviorSubject<any>(null);
+	$contextMenu = new BehaviorSubject<any>(null);
 	$dialog = new BehaviorSubject<any>(null);
 	$color = new BehaviorSubject<any>(undefined);
 	$themes = new BehaviorSubject<any>({ selected: 'Default', themes: [] });
@@ -102,11 +102,11 @@ export class ChartService {
 	}
 
 	openContext(params) {
-		this.$contexMenu.next(params);
+		this.$contextMenu.next(params);
 	}
 
 	closeContext() {
-		this.$contexMenu.next(null);
+		this.$contextMenu.next(null);
 	}
 
 	setPeriodicity({ period, interval, timeUnit }) {
@@ -149,7 +149,7 @@ export class ChartService {
 	toggleCrosshair(value = null) {
 		const { layout } = this.ciq;
 		layout.crosshair = value !== null ? value : !layout.crosshair;
-		this.$chrosshair.next(layout.crosshair);
+		this.$crosshair.next(layout.crosshair);
 	}
 
 	// If value is provided the function works as set method
