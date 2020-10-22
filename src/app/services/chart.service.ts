@@ -130,7 +130,7 @@ export class ChartService {
 	}
 
 	removeSeries(series) {
-		this.ciq.removeSeries(series.display, this.ciq.ciq);
+		this.ciq.removeSeries(series.display, this.ciq.chart);
 	}
 
 	changeChartType(type) {
