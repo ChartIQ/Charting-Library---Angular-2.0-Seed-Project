@@ -215,7 +215,7 @@ export class ChartService {
 	}
 
 	getDrawingParameters(tool) {
-		return <any>CIQ.Drawing.getDrawingParameters(this.ciq, tool);
+		return CIQ.Drawing.getDrawingParameters(this.ciq, tool);
 	}
 
 	getDrawingToolList() {
