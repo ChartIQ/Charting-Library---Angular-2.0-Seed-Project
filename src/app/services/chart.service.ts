@@ -14,7 +14,7 @@ import 'chartiq/examples/markets/marketSymbologySample'
 
 @Injectable()
 export class ChartService {
-	ciq: any;
+	ciq: CIQ.ChartEngine;
 	layout: any;
 	contextContainer: HTMLElement;
 
@@ -114,7 +114,7 @@ export class ChartService {
 	}
 
 	setSpan(multiplier, span) {
-		this.ciq.setSpan({ multiplier, span });
+		this.ciq.setSpan(<any>{ multiplier, span }, () => {});
 	}
 
 	changeSymbol(symbol) {
@@ -124,8 +124,7 @@ export class ChartService {
 	addSeries(seriesName) {
 		const series = this.ciq.addSeries(seriesName, {
 			isComparison: true,
-			color: getRandomColor(),
-			data: { useDefaultQuoteFeed: true },
+			color: getRandomColor()
 		});
 	}
 
@@ -156,13 +155,13 @@ export class ChartService {
 	toggleRangeSlider(value) {
 		const { ciq: stx } = this;
 		if (typeof value === 'undefined') {
-			value = !stx.layout.rangeSlider;
+			value = !stx.layout['rangeSlider'];
 		}
-		stx.layout.rangeSlider = value;
+		stx.layout['rangeSlider'] = value;
 	
 		import('chartiq/js/addOns').then(() => {
-			if (!stx.slider) new CIQ.RangeSlider({ stx });
-			stx.slider.display(stx.layout.rangeSlider ? 1 : 0);
+			if (!stx['slider']) new CIQ.RangeSlider({ stx });
+			stx['slider'].display(stx.layout['rangeSlider'] ? 1 : 0);
 		});
 	}
 
@@ -238,7 +237,7 @@ export class ChartService {
 			fontFamily,
 			fontStyle,
 			fontWeight,
-		} = this.ciq.canvasStyle(styleName);
+		} = <any>this.ciq.canvasStyle(styleName);
 
 		const { font } = this.ciq.currentVectorParameters.annotation;
 
@@ -314,7 +313,7 @@ export class ChartService {
 		this.ciq.setTimeZone(this.ciq.dataZone, zone);
 
 		if (zone === null) {
-			this.ciq.defaultDisplayTimeZone = null;
+			this.ciq['defaultDisplayTimeZone'] = null;
 
 			CIQ.ChartEngine['registeredContainers'].forEach(({ stx }) => {
 				stx.displayZone = null;
