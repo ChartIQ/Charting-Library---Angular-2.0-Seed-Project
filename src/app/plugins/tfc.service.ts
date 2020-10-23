@@ -15,13 +15,14 @@ export class TfcService extends ITfc {
 			// @ts-ignore /* prevent compile failure when tfc plugin is not available as part of library */
 			import('chartiq/plugins/tfc/tfc-demo'),
 			import('chartiq/js/components.js'), // use sidepanel.js if available instead of components.js
+			import('chartiq/js/componentUI.js'), // use sidepanel.js if available instead of components.js
 			// import('chartiq/js/webcomponents/sidepanel.js'),
 		]).then(() => {
 				if (CIQ.UI.ensureComponentsRegistered) CIQ.UI.ensureComponentsRegistered();
-				new CIQ.TFC({
+				new CIQ['TFC']({
 					stx,
 					context,
-					account: CIQ.Account.Demo,
+					account: CIQ['Account'].Demo,
 				});
 			}
 		);

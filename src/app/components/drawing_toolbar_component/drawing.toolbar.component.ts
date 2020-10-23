@@ -78,7 +78,7 @@ export class DrawingToolbar {
 			fillColor,
 			lineWidth,
 			pattern,
-		} = this.chartService.getDrawingParameters(tool);
+		} = <any>this.chartService.getDrawingParameters(tool);
 
 		Object.assign(this, {
 			fillColor,

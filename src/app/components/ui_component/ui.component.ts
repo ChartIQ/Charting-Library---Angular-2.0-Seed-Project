@@ -60,7 +60,7 @@ export class ChartUI implements OnInit, OnDestroy {
 	}
 
 	ngOnInit() {
-		this.$crosshair = this.chartService.$chrosshair;
+		this.$crosshair = this.chartService.$crosshair;
 		this.$themes = this.chartService.$themes;
 		this.$toolbarActive = this.chartService.$toolbarActive;
 		this.$tfc = this.chartService.$tfc;
