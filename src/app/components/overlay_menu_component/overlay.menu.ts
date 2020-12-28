@@ -16,7 +16,7 @@ export class OverlayMenu implements OnInit {
 	constructor(private chartSevice: ChartService) {}
 
 	ngOnInit() {
-		this.$showMenu = this.chartSevice.$contexMenu.pipe(
+		this.$showMenu = this.chartSevice.$contextMenu.pipe(
 			map(params => this.positionToStyle(params))
 		);
 	}

@@ -14,17 +14,17 @@ import 'chartiq/examples/markets/marketSymbologySample'
 
 @Injectable()
 export class ChartService {
-	ciq: any;
+	ciq: CIQ.ChartEngine;
 	layout: any;
 	contextContainer: HTMLElement;
 
 	themes = this.config.themes;
 
 	$chartSeries = new BehaviorSubject([]);
-	$chrosshair = new BehaviorSubject(false);
+	$crosshair = new BehaviorSubject(false);
 
 	$layout = new BehaviorSubject<any>(null);
-	$contexMenu = new BehaviorSubject<any>(null);
+	$contextMenu = new BehaviorSubject<any>(null);
 	$dialog = new BehaviorSubject<any>(null);
 	$color = new BehaviorSubject<any>(undefined);
 	$themes = new BehaviorSubject<any>({ selected: 'Default', themes: [] });
@@ -68,7 +68,7 @@ export class ChartService {
 	) {
 		const ciq = new CIQ.ChartEngine({ container });
 
-		ciq.setPeriodicity({ periodicity, interval, timeUnit });
+		ciq.setPeriodicity({ period: periodicity, interval, timeUnit });
 		ciq.setMarketFactory(CIQ.Market.Symbology.factory);
 		ciq.attachQuoteFeed(quoteFeedSimulator, { refreshInterval });
 
@@ -102,11 +102,11 @@ export class ChartService {
 	}
 
 	openContext(params) {
-		this.$contexMenu.next(params);
+		this.$contextMenu.next(params);
 	}
 
 	closeContext() {
-		this.$contexMenu.next(null);
+		this.$contextMenu.next(null);
 	}
 
 	setPeriodicity({ period, interval, timeUnit }) {
@@ -114,7 +114,7 @@ export class ChartService {
 	}
 
 	setSpan(multiplier, span) {
-		this.ciq.setSpan({ multiplier, span });
+		this.ciq.setSpan(<any>{ multiplier, span }, () => {});
 	}
 
 	changeSymbol(symbol) {
@@ -124,13 +124,12 @@ export class ChartService {
 	addSeries(seriesName) {
 		const series = this.ciq.addSeries(seriesName, {
 			isComparison: true,
-			color: getRandomColor(),
-			data: { useDefaultQuoteFeed: true },
+			color: getRandomColor()
 		});
 	}
 
 	removeSeries(series) {
-		this.ciq.removeSeries(series.display, this.ciq.ciq);
+		this.ciq.removeSeries(series.display, this.ciq.chart);
 	}
 
 	changeChartType(type) {
@@ -149,20 +148,20 @@ export class ChartService {
 	toggleCrosshair(value = null) {
 		const { layout } = this.ciq;
 		layout.crosshair = value !== null ? value : !layout.crosshair;
-		this.$chrosshair.next(layout.crosshair);
+		this.$crosshair.next(layout.crosshair);
 	}
 
 	// If value is provided the function works as set method
 	toggleRangeSlider(value) {
 		const { ciq: stx } = this;
 		if (typeof value === 'undefined') {
-			value = !stx.layout.rangeSlider;
+			value = !stx.layout['rangeSlider'];
 		}
-		stx.layout.rangeSlider = value;
+		stx.layout['rangeSlider'] = value;
 	
 		import('chartiq/js/addOns').then(() => {
-			if (!stx.slider) new CIQ.RangeSlider({ stx });
-			stx.slider.display(stx.layout.rangeSlider ? 1 : 0);
+			if (!stx['slider']) new CIQ.RangeSlider({ stx });
+			stx['slider'].display(stx.layout['rangeSlider'] ? 1 : 0);
 		});
 	}
 
@@ -238,7 +237,7 @@ export class ChartService {
 			fontFamily,
 			fontStyle,
 			fontWeight,
-		} = this.ciq.canvasStyle(styleName);
+		} = <any>this.ciq.canvasStyle(styleName);
 
 		const { font } = this.ciq.currentVectorParameters.annotation;
 
@@ -314,9 +313,9 @@ export class ChartService {
 		this.ciq.setTimeZone(this.ciq.dataZone, zone);
 
 		if (zone === null) {
-			this.ciq.defaultDisplayTimeZone = null;
+			this.ciq['defaultDisplayTimeZone'] = null;
 
-			CIQ.ChartEngine.registeredContainers.forEach(({ stx }) => {
+			CIQ.ChartEngine['registeredContainers'].forEach(({ stx }) => {
 				stx.displayZone = null;
 				stx.setTimeZone();
 

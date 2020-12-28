@@ -22,7 +22,7 @@ For a variety of complete charting solutions that can be easily incorporated int
 
 - A copy of the ChartIQ library, version 8.0.0 or later.
 
-    If you do not have a copy of the library, please contact your ChartIQ account manager or send an email to [support@chartiq.com](mailto:support@chartiq.com).
+  If you do not have a copy of the library, please contact your account manager or send an email to <info@cosaic.io>.
 
 ## Getting started
 
